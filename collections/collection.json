@@ -1,0 +1,736 @@
+{
+  "info": {
+    "_postman_id": "7b8f9e12-3a45-4c67-8d90-1e2f3a4b5c6d",
+    "name": "NEWDB (DaaS platform)",
+    "description": "Официальная Postman-коллекция NEWDB REST API — универсального шлюза для проверки физических лиц, юридических лиц, иностранных граждан, залогов, недвижимости и судебных дел по официальным государственным реестрам РФ (ФНС, ФССП, МВД, Федресурс, КАД Арбитр, ЕГРЮЛ, ЕГРИП, Нотариат/Залоги, ГАС Правосудие, РКЛ).\n\nДокументация: https://newdb.net/docs\nБазовый URL: {{base_url}} (https://api.newdb.net/v2)\nАутентификация: заголовок X-API-KEY: {{api_token}}",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "value",
+        "value": "{{api_token}}",
+        "type": "string"
+      },
+      {
+        "key": "key",
+        "value": "X-API-KEY",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.newdb.net/v2",
+      "type": "string"
+    },
+    {
+      "key": "api_token",
+      "value": "your_api_token_here",
+      "type": "string"
+    },
+    {
+      "key": "request_id",
+      "value": "00000000-0000-4000-8000-000000000001",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "00. Service & Auth",
+      "description": "Базовые системные методы: проверка баланса токена, отправка асинхронных задач и получение результатов по requestId.",
+      "item": [
+        {
+          "name": "Get Token Balance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/balance",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "balance"
+              ]
+            },
+            "description": "Проверка текущего остатка оплаченных запросов по API-токену."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task Status by RequestId",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{request_id}}\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Получение результата ранее отправленной задачи по ее requestId."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "01. Физические лица (Physical Persons)",
+      "item": [
+        {
+          "name": "complex_by_passport — Комплексная проверка физлица по паспорту",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data.requestId) {",
+                  "    pm.collectionVariables.set('request_id', data.requestId);",
+                  "    console.log('Saved requestId:', data.requestId);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"complex_by_passport\",\n    \"country\": \"ru\",\n    \"seria\": \"4510\",\n    \"number\": \"123456\",\n    \"firstname\": \"Иван\",\n    \"lastname\": \"Иванов\",\n    \"secondname\": \"Иванович\",\n    \"dob\": \"1990-01-01\",\n    \"regioncode\": \"100\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Комплексный скоринг физического лица: параллельно опрашивает ФНС, МВД, ФССП, банкротство, арбитраж, залоги и ЕГРИП."
+          },
+          "response": []
+        },
+        {
+          "name": "passport_mvd — Проверка действительности паспорта РФ (МВД)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"passport_mvd\",\n    \"country\": \"ru\",\n    \"seria\": \"4510\",\n    \"number\": \"123456\",\n    \"firstname\": \"Иван\",\n    \"lastname\": \"Иванов\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка действительности паспорта гражданина РФ по базе МВД."
+          },
+          "response": []
+        },
+        {
+          "name": "passport_fns — Проверка паспорта и получение ИНН (ФНС)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"passport_fns\",\n    \"country\": \"ru\",\n    \"seria\": \"4510\",\n    \"number\": \"123456\",\n    \"firstname\": \"Иван\",\n    \"lastname\": \"Иванов\",\n    \"secondname\": \"Иванович\",\n    \"dob\": \"1990-01-01\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Получение ИНН физлица и сверка паспортных данных в базе ФНС."
+          },
+          "response": []
+        },
+        {
+          "name": "fssp_person — Исполнительные производства ФССП",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"fssp_person\",\n    \"country\": \"ru\",\n    \"firstname\": \"Иван\",\n    \"lastname\": \"Иванов\",\n    \"secondname\": \"Иванович\",\n    \"dob\": \"1990-01-01\",\n    \"regioncode\": \"100\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Поиск открытых исполнительных производств, долгов и штрафов в ФССП."
+          },
+          "response": []
+        },
+        {
+          "name": "bankrot_person — Банкротство физлиц и ИП (Федресурс)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"bankrot_person\",\n    \"country\": \"ru\",\n    \"innfiz\": \"500100732259\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка статуса банкротства гражданина по реестру Федресурс (ЕФРСБ)."
+          },
+          "response": []
+        },
+        {
+          "name": "pledge_person — Залоги движимого имущества (ФНП)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"pledge_person\",\n    \"country\": \"ru\",\n    \"firstname\": \"Иван\",\n    \"lastname\": \"Иванов\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Реестр уведомлений о залоге движимого имущества (ФНП)."
+          },
+          "response": []
+        },
+        {
+          "name": "arbitr_person — Арбитражные дела физлиц (КАД)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"arbitr_person\",\n    \"country\": \"ru\",\n    \"innfiz\": \"500100732259\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Судебные дела физлица или ИП в картотеке КАД Арбитр."
+          },
+          "response": []
+        },
+        {
+          "name": "nalog_debt — Налоговая задолженность по ИНН (ФНС)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"nalog_debt\",\n    \"country\": \"ru\",\n    \"inn\": \"7712345678\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Сведения о налоговой задолженности перед бюджетом."
+          },
+          "response": []
+        },
+        {
+          "name": "fns_block_person — Блокировки счетов физлица (ФНС)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"fns_block_person\",\n    \"country\": \"ru\",\n    \"innfiz\": \"500100732259\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Приостановления операций по счетам физлица налоговыми органами."
+          },
+          "response": []
+        },
+        {
+          "name": "egrul_ip — Выписка ЕГРИП и статус ИП (ФНС)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"egrul_ip\",\n    \"country\": \"ru\",\n    \"innfiz\": \"500100732259\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Сведения о регистрации и статусе индивидуального предпринимателя."
+          },
+          "response": []
+        },
+        {
+          "name": "terrorist — Перечень террористов/экстремистов (Росфинмониторинг)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"terrorist\",\n    \"country\": \"ru\",\n    \"firstname\": \"Иван\",\n    \"lastname\": \"Иванов\",\n    \"secondname\": \"Иванович\",\n    \"dob\": \"1990-01-01\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка по реестру Росфинмониторинга (терроризм, экстремизм, ОМУ)."
+          },
+          "response": []
+        },
+        {
+          "name": "elmk_registry — Электронная медкнижка (ЭЛМК)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"elmk_registry\",\n    \"country\": \"ru\",\n    \"elmk_number\": \"00-00-000000-00\",\n    \"snils\": \"123-456-789 00\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка действительности электронной медицинской книжки в ЕГИСЗ."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02. Юридические лица (Legal Entities)",
+      "item": [
+        {
+          "name": "complex_by_inn — Комплексная проверка компании по ИНН",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"complex_by_inn\",\n    \"country\": \"ru\",\n    \"inn\": \"7707083893\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Комплексная проверка организации по ИНН (ЕГРЮЛ, блокировки ФНС, арбитраж, банкротство, проверки руководства и учредителей)."
+          },
+          "response": []
+        },
+        {
+          "name": "egrul — Сведения ЕГРЮЛ и Прозрачный бизнес",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"egrul\",\n    \"country\": \"ru\",\n    \"inn\": \"7707083893\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Полная выписка ЕГРЮЛ, реквизиты, руководство, учредители, финансы."
+          },
+          "response": []
+        },
+        {
+          "name": "fns_block — Блокировки банковских счетов юрлица (ФНС)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"fns_block\",\n    \"country\": \"ru\",\n    \"inn\": \"7707083893\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Решения налоговых органов о приостановлении операций по счетам компании."
+          },
+          "response": []
+        },
+        {
+          "name": "bankrot_legal — Банкротство юрлиц (Федресурс)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"bankrot_legal\",\n    \"country\": \"ru\",\n    \"inn\": \"7707083893\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка процедур банкротства юридического лица."
+          },
+          "response": []
+        },
+        {
+          "name": "arbitr_legal — Арбитражные дела организации (КАД)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"arbitr_legal\",\n    \"country\": \"ru\",\n    \"inn\": \"7707083893\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Арбитражные споры компании (истец, ответчик, суммы исков)."
+          },
+          "response": []
+        },
+        {
+          "name": "fssp_legal — Исполнительные производства юрлица (ФССП)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"fssp_legal\",\n    \"country\": \"ru\",\n    \"inn\": \"7707083893\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Задолженности и открытые исполнительные производства компании."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03. Иностранные граждане (Foreign Citizens)",
+      "item": [
+        {
+          "name": "rkl — Реестр контролируемых лиц МВД РФ (РКЛ)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"rkl\",\n    \"country\": \"ru\",\n    \"firstname\": \"JOHN\",\n    \"lastname\": \"DOE\",\n    \"dob\": \"1990-01-01\",\n    \"id_doc_number\": \"12345678\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка иностранного гражданина в Реестре контролируемых лиц МВД."
+          },
+          "response": []
+        },
+        {
+          "name": "patent_msk — Трудовой патент (Москва)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"patent_msk\",\n    \"country\": \"ru\",\n    \"number\": \"7712345678\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка действительности патента на работу в Москве."
+          },
+          "response": []
+        },
+        {
+          "name": "foreign_vng — Вид на жительство (ВНЖ)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"foreign_vng\",\n    \"country\": \"ru\",\n    \"seria\": \"82\",\n    \"number\": \"1234567\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка действительности вида на жительство иностранного гражданина."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04. Имущество и залоги (Property & Pledge)",
+      "item": [
+        {
+          "name": "pledge_vin — Проверка залога автомобиля по VIN (ФНП)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"pledge_vin\",\n    \"country\": \"ru\",\n    \"vin\": \"XTA21703080123456\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Проверка залогов автотранспорта по реестру Федеральной нотариальной палаты."
+          },
+          "response": []
+        },
+        {
+          "name": "rosreestr — Сведения об объекте недвижимости",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"rosreestr\",\n    \"country\": \"ru\",\n    \"cadastr_number\": \"77:01:0001001:1001\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Сведения Росреестра по кадастровому номеру или адресу."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05. ГАС Правосудие и суды (Justice)",
+      "item": [
+        {
+          "name": "pravo_search — Поиск судебных дел по ФИО / наименованию",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"pravo_search\",\n    \"country\": \"ru\",\n    \"query\": \"Иванов Иван Иванович\",\n    \"limit\": 10\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": []
+            },
+            "description": "Поиск гражданских и уголовных дел в судах общей юрисдикции."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
