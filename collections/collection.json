@@ -729,6 +729,46 @@
             "description": "Поиск гражданских и уголовных дел в судах общей юрисдикции."
           },
           "response": []
+        },
+        {
+          "name": "kad_event_monitor — Процессуальный контроль дела КАД",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{api_token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"requestId\": \"{{$guid}}\",\n  \"params\": {\n    \"method\": \"kad_event_monitor\",\n    \"country\": \"ru\",\n    \"case_number\": \"А56-795/2024\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}",
+              "host": [
+                "{{base_url}}"
+              ]
+            },
+            "description": "Процессуальный мониторинг конкретного дела КАД по номеру дела: snapshot, process_events, risk, recommended_actions и delta относительно previous_snapshot."
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "pm.collectionVariables.set('request_id', data.requestId);",
+                  "pm.test('response has requestId', function () { pm.expect(data.requestId).to.exist; });"
+                ]
+              }
+            }
+          ]
         }
       ]
     }
