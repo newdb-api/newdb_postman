@@ -59,10 +59,10 @@ postman/
   - **`01. Тестовый контур Sandbox (GET запросы)`**: 18 методов с параметром `format=zb` на `{{test_base_url}}/run`.
   - **`02. Тестовый контур Sandbox (POST запросы)`**: 18 методов на `{{test_base_url}}` с телом `{"method": "...", "params": {...}, "format": "zb"}`.
   - **`03. Боевой контур Production (ZB формат)`**: 18 методов на `{{base_url}}` в формате ZB.
-* **`07. Формат КОНТУР (Focus)`** — полная совместимость со схемами Контур.Фокус API v3:
-  - **`01. Тестовый контур Sandbox (GET запросы)`**: 10 ключевых методов (`/api3/req`, `/api3/smzGetStatus`, `/api3/fssp`, `/api3/fnsBlockedBankAccounts`, `/api3/companyBankruptcy`, `/api3/trademarks`, `/api3/checkPassport` и др.) с параметром `format=kontur` на `{{test_base_url}}/run`.
-  - **`02. Тестовый контур Sandbox (POST запросы)`**: 10 методов на `{{test_base_url}}` с телом `{"method": "...", "params": {...}, "format": "kontur"}`.
-  - **`03. Боевой контур Production (Kontur формат)`**: 10 методов на `{{base_url}}` в формате Контур.Фокус.
+* **`07. Формат КОНТУР.ПОКУС (Pokus)`** — полная совместимость со схемами Контур.Покус (Focus API v3):
+  - **`01. Тестовый контур Sandbox (GET запросы)`**: 10 ключевых методов (`/api3/req`, `/api3/smzGetStatus`, `/api3/fssp`, `/api3/fnsBlockedBankAccounts`, `/api3/companyBankruptcy`, `/api3/trademarks`, `/api3/checkPassport` и др.) с параметром `format=pokus` или `format=kontur` на `{{test_base_url}}/run`.
+  - **`02. Тестовый контур Sandbox (POST запросы)`**: 10 методов на `{{test_base_url}}` с телом `{"method": "...", "params": {...}, "format": "pokus"}`.
+  - **`03. Боевой контур Production (Pokus формат)`**: 10 методов на `{{base_url}}` в формате Контур.Покус.
 
 ---
 
