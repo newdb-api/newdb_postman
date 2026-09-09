@@ -1,0 +1,49 @@
+{
+  "id": "7b8c9d0e-1f2a-3b4c-5d6e-7f8a9b0c1d2e",
+  "name": "NEWDB Sandbox (Test)",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "https://api.newdb.net/v2",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "test_base_url",
+      "value": "https://api.newdb.net/test/v2",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "api_token",
+      "value": "test_token_newdb_sandbox",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "token",
+      "value": "test_token_newdb_sandbox",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "api_prod",
+      "value": "https://api.newdb.net/test/v2",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "format",
+      "value": "zb",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "request_id",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}

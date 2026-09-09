@@ -9,9 +9,33 @@
       "enabled": true
     },
     {
+      "key": "test_base_url",
+      "value": "https://api.newdb.net/test/v2",
+      "type": "default",
+      "enabled": true
+    },
+    {
       "key": "api_token",
       "value": "your_api_token_here",
       "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "token",
+      "value": "your_api_token_here",
+      "type": "secret",
+      "enabled": true
+    },
+    {
+      "key": "api_prod",
+      "value": "https://api.newdb.net/v2",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "format",
+      "value": "zb",
+      "type": "default",
       "enabled": true
     },
     {
