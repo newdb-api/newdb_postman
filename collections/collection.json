@@ -7808,6 +7808,2520 @@
           ]
         }
       ]
+    },
+    {
+      "name": "07. Формат КОНТУР (Focus)",
+      "description": "Коллекция методов NewDB с нативной поддержкой конвертации ответов в формат сервиса Контур.Фокус (Kontur.Focus API v3).\n\nВключает запросы как для тестового контура Sandbox ({{test_base_url}}), так и для боевого API ({{base_url}}).\nПоддерживается передача флага `format=kontur`, `format=focus`, `format=kf` в URL, в JSON-теле POST, либо через HTTP-заголовок `X-Response-Format: kontur`.",
+      "item": [
+        {
+          "name": "01. Тестовый контур Sandbox (GET запросы)",
+          "description": "Мгновенные вызовы тестового контура `{{test_base_url}}/run?...&format=kontur` без расхода баланса. Возвращают валидные структуры Контур.Фокус.",
+          "item": [
+            {
+              "name": "Базовые реквизиты ЮЛ (/api3/req - ЕГРЮЛ) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=egrul&inn=7707083893&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "egrul",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус (kontur, focus, kf)"
+                    }
+                  ]
+                },
+                "description": "Получение базовых реквизитов организации (ИНН, ОГРН, КПП, руководство, статус, ОКВЭД, уставный капитал) в формате Kontur.Focus /api3/req.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "34405d7e-c5cd-4935-be36-e8dc8032615e",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=egrul&inn=7707083893&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "egrul",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус (kontur, focus, kf)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"1027700132195\",\n    \"focusHref\": \"https://focus.kontur.ru/entity?query=7707083893\",\n    \"UL\": {\n      \"kpp\": \"773601001\",\n      \"legalName\": {\n        \"full\": \"ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \\\"СБЕРБАНК РОССИИ\\\"\",\n        \"short\": \"ПАО \\\"СБЕРБАНК\\\"\",\n        \"date\": \"1991-06-20\"\n      },\n      \"legalAddress\": {\n        \"parsedAddressRF\": {\n          \"rawAddress\": \"117312, Г.МОСКВА, УЛ. ВАВИЛОВА, Д.19\"\n        }\n      },\n      \"status\": {\n        \"statusString\": \"Действующее\",\n        \"date\": \"1991-06-20\"\n      },\n      \"heads\": [\n        {\n          \"fio\": \"ГРЕФ ГЕРМАН ОСКАРОВИЧ\",\n          \"position\": \"Президент, Председатель Правления\",\n          \"innfl\": \"770400000000\"\n        }\n      ],\n      \"managementCompanies\": [],\n      \"registrationDate\": \"1991-06-20\",\n      \"statedCapital\": {\n        \"sum\": 67760844000.0\n      }\n    }\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Базовые реквизиты ИП (/api3/req - ЕГРИП) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=egrul_ip&inn=771234567890&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "egrul_ip",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "771234567890",
+                      "description": "ИНН индивидуального предпринимателя"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Получение базовых реквизитов индивидуального предпринимателя в формате Kontur.Focus /api3/req (блок IP).\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "a1468de4-4a73-4709-a62f-3b5e022ccc75",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=egrul_ip&inn=771234567890&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "egrul_ip",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "771234567890",
+                          "description": "ИНН индивидуального предпринимателя"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"771234567890\",\n    \"ogrnip\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/entity?query=771234567890\",\n    \"IP\": {\n      \"fio\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n      \"status\": {\n        \"statusString\": \"Действующее\",\n        \"date\": \"2020-05-15\"\n      },\n      \"registrationDate\": \"2020-05-15\"\n    }\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Проверка статуса самозанятого (/api3/smzGetStatus) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=self_employed&inn=771234567890&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "self_employed",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "771234567890",
+                      "description": "ИНН физического лица или самозанятого"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Проверка статуса плательщика налога на профессиональный доход (НПД) в формате Kontur.Focus /api3/smzGetStatus.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "1020612d-4648-4d5a-aeef-f40e19f4f76e",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=self_employed&inn=771234567890&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "self_employed",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "771234567890",
+                          "description": "ИНН физического лица или самозанятого"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"taskStatus\": \"Ready\",\n  \"smzStatusResult\": [\n    {\n      \"inn\": \"771234567890\",\n      \"status\": true,\n      \"registrationDate\": \"2021-02-01\",\n      \"message\": \"Физическое лицо является плательщиком налога на профессиональный доход\"\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ЮЛ (/api3/fssp) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=fssp_legal&inn=7707083893&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "fssp_legal",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Проверка исполнительных производств юридического лица из ФССП в формате Kontur.Focus /api3/fssp.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "81621772-a048-480f-bec1-db53cd6114d8",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=fssp_legal&inn=7707083893&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "fssp_legal",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fssp?query=7707083893\",\n    \"fssp\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ФЛ (/api3/fssp) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=fssp_person&inn=771234567890&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "fssp_person",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "771234567890",
+                      "description": "ИНН физического лица"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Проверка исполнительных производств физического лица из ФССП в формате Kontur.Focus /api3/fssp.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "8af9b20c-54b7-4454-86ef-76b9dd93e4b4",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=fssp_person&inn=771234567890&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "fssp_person",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "771234567890",
+                          "description": "ИНН физического лица"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"771234567890\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fssp?query=771234567890\",\n    \"fssp\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов (/api3/fnsBlockedBankAccounts) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=fns_block&inn=7707083893&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "fns_block",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Решения налоговых органов (ФНС) о приостановлении операций по счетам налогоплательщика в формате Kontur.Focus /api3/fnsBlockedBankAccounts.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "01da757e-a7aa-4e79-b6a0-6cc0995e4d10",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=fns_block&inn=7707083893&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "fns_block",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fnsBlockedBankAccounts?query=7707083893\",\n    \"blockedAccountsInfo\": [\n      {\n        \"updateDate\": \"\",\n        \"totalCount\": 0,\n        \"suspensions\": []\n      }\n    ]\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Банкротство ЮЛ (/api3/companyBankruptcy) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=bankrot_legal&inn=7707083893&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "bankrot_legal",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Сведения о текущей стадии банкротства юридического лица, номере дела и сообщениях ЕФРСБ в формате Kontur.Focus /api3/companyBankruptcy.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "0eca2a47-9117-43b2-9d9c-cca81338368b",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=bankrot_legal&inn=7707083893&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "bankrot_legal",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/bankruptcy?query=7707083893\",\n    \"stage\": \"NO_BANKRUPTCY\",\n    \"caseNumber\": \"\",\n    \"acceptanceDate\": null,\n    \"stageDate\": null,\n    \"messages\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Товарные знаки правообладателя (/api3/trademarks) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=intellectual_property&inn=7707083893&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "intellectual_property",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН правообладателя"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Зарегистрированные товарные знаки и интеллектуальная собственность правообладателя в формате Kontur.Focus /api3/trademarks.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "63c0db9f-87c4-4382-99af-33c0d2d8cfe4",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=intellectual_property&inn=7707083893&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "intellectual_property",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН правообладателя"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": null,\n    \"focusHref\": \"https://focus.kontur.ru/trademarks?query=7707083893\",\n    \"trademarks\": [\n      {\n        \"docNumber\": \"\",\n        \"dateEnd\": \"\",\n        \"trademarkType\": {\n          \"code\": \"RUTM\",\n          \"name\": \"Товарный знак\"\n        },\n        \"image\": null\n      }\n    ]\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Проверка действительности паспорта (/api3/checkPassport) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=complex_by_passport&seria=4510&number=123456&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "complex_by_passport",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "seria",
+                      "value": "4510",
+                      "description": "Серия паспорта РФ"
+                    },
+                    {
+                      "key": "number",
+                      "value": "123456",
+                      "description": "Номер паспорта РФ"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Проверка действительности паспорта гражданина РФ по базе МВД в формате Kontur.Focus /api3/checkPassport.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "c1633f11-3149-4cf3-8135-07bb73bc309e",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=complex_by_passport&seria=4510&number=123456&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "complex_by_passport",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "seria",
+                          "value": "4510",
+                          "description": "Серия паспорта РФ"
+                        },
+                        {
+                          "key": "number",
+                          "value": "123456",
+                          "description": "Номер паспорта РФ"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"number\": \"4510 123456\",\n    \"isInvalid\": false,\n    \"invalidSince\": null\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Судебные дела и споры (/api3/generalCourtCases) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=pravo_search&fio=Иванов Иван Иванович&format=kontur",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "pravo_search",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "fio",
+                      "value": "Иванов Иван Иванович",
+                      "description": "ФИО участника судебного дела"
+                    },
+                    {
+                      "key": "format",
+                      "value": "kontur",
+                      "description": "Флаг формата Контур.Фокус"
+                    }
+                  ]
+                },
+                "description": "Судебные дела и процессуальные решения в судах общей юрисдикции и арбитраже в формате Kontur.Focus /api3/generalCourtCases.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** Контур.Фокус (KF / Kontur)."
+              },
+              "response": [
+                {
+                  "id": "bfc93e70-c25b-4577-8090-2e1eeaf8fc35",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=pravo_search&fio=Иванов Иван Иванович&format=kontur",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "pravo_search",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "fio",
+                          "value": "Иванов Иван Иванович",
+                          "description": "ФИО участника судебного дела"
+                        },
+                        {
+                          "key": "format",
+                          "value": "kontur",
+                          "description": "Флаг формата Контур.Фокус"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": null,\n    \"cases\": [\n      {\n        \"caseNumber\": \"02-1234/2026\",\n        \"caseDate\": \"\",\n        \"courtName\": \"\",\n        \"judge\": \"Петров П.П.\",\n        \"participants\": []\n      }\n    ]\n  }\n]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "02. Тестовый контур Sandbox (POST запросы)",
+          "description": "POST-вызовы `{{test_base_url}}` с телом `{\"method\": \"...\", \"params\": {...}, \"format\": \"kontur\"}`.",
+          "item": [
+            {
+              "name": "Базовые реквизиты ЮЛ (/api3/req - ЕГРЮЛ) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"egrul\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Получение базовых реквизитов организации (ИНН, ОГРН, КПП, руководство, статус, ОКВЭД, уставный капитал) в формате Kontur.Focus /api3/req.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "055f7d5d-430d-4bc9-a1c2-9c35301ad6f6",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"egrul\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"1027700132195\",\n    \"focusHref\": \"https://focus.kontur.ru/entity?query=7707083893\",\n    \"UL\": {\n      \"kpp\": \"773601001\",\n      \"legalName\": {\n        \"full\": \"ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \\\"СБЕРБАНК РОССИИ\\\"\",\n        \"short\": \"ПАО \\\"СБЕРБАНК\\\"\",\n        \"date\": \"1991-06-20\"\n      },\n      \"legalAddress\": {\n        \"parsedAddressRF\": {\n          \"rawAddress\": \"117312, Г.МОСКВА, УЛ. ВАВИЛОВА, Д.19\"\n        }\n      },\n      \"status\": {\n        \"statusString\": \"Действующее\",\n        \"date\": \"1991-06-20\"\n      },\n      \"heads\": [\n        {\n          \"fio\": \"ГРЕФ ГЕРМАН ОСКАРОВИЧ\",\n          \"position\": \"Президент, Председатель Правления\",\n          \"innfl\": \"770400000000\"\n        }\n      ],\n      \"managementCompanies\": [],\n      \"registrationDate\": \"1991-06-20\",\n      \"statedCapital\": {\n        \"sum\": 67760844000.0\n      }\n    }\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Базовые реквизиты ИП (/api3/req - ЕГРИП) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"egrul_ip\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Получение базовых реквизитов индивидуального предпринимателя в формате Kontur.Focus /api3/req (блок IP).\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "9feb02fe-c6e4-4cba-8371-bf754e84e8b8",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"egrul_ip\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"771234567890\",\n    \"ogrnip\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/entity?query=771234567890\",\n    \"IP\": {\n      \"fio\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n      \"status\": {\n        \"statusString\": \"Действующее\",\n        \"date\": \"2020-05-15\"\n      },\n      \"registrationDate\": \"2020-05-15\"\n    }\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Проверка статуса самозанятого (/api3/smzGetStatus) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"self_employed\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка статуса плательщика налога на профессиональный доход (НПД) в формате Kontur.Focus /api3/smzGetStatus.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "c76b34aa-644e-4b1e-a321-7bfc67c19750",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"self_employed\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"taskStatus\": \"Ready\",\n  \"smzStatusResult\": [\n    {\n      \"inn\": \"771234567890\",\n      \"status\": true,\n      \"registrationDate\": \"2021-02-01\",\n      \"message\": \"Физическое лицо является плательщиком налога на профессиональный доход\"\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ЮЛ (/api3/fssp) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fssp_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка исполнительных производств юридического лица из ФССП в формате Kontur.Focus /api3/fssp.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "3ed9c198-10cb-4b40-89a0-72c2e05738aa",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fssp_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fssp?query=7707083893\",\n    \"fssp\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ФЛ (/api3/fssp) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fssp_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка исполнительных производств физического лица из ФССП в формате Kontur.Focus /api3/fssp.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "b9d3e598-6b79-4f52-be18-e007a6929be2",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fssp_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"771234567890\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fssp?query=771234567890\",\n    \"fssp\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов (/api3/fnsBlockedBankAccounts) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fns_block\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Решения налоговых органов (ФНС) о приостановлении операций по счетам налогоплательщика в формате Kontur.Focus /api3/fnsBlockedBankAccounts.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "ea721edb-1014-4af9-9685-6e380e263178",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fns_block\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fnsBlockedBankAccounts?query=7707083893\",\n    \"blockedAccountsInfo\": [\n      {\n        \"updateDate\": \"\",\n        \"totalCount\": 0,\n        \"suspensions\": []\n      }\n    ]\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Банкротство ЮЛ (/api3/companyBankruptcy) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"bankrot_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Сведения о текущей стадии банкротства юридического лица, номере дела и сообщениях ЕФРСБ в формате Kontur.Focus /api3/companyBankruptcy.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "a7802418-cf8e-4b0d-b5e1-8bee5dcddf15",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"bankrot_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/bankruptcy?query=7707083893\",\n    \"stage\": \"NO_BANKRUPTCY\",\n    \"caseNumber\": \"\",\n    \"acceptanceDate\": null,\n    \"stageDate\": null,\n    \"messages\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Товарные знаки правообладателя (/api3/trademarks) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"intellectual_property\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Зарегистрированные товарные знаки и интеллектуальная собственность правообладателя в формате Kontur.Focus /api3/trademarks.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "6be3414a-ed53-4753-b0bb-d3bec180a425",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"intellectual_property\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": null,\n    \"focusHref\": \"https://focus.kontur.ru/trademarks?query=7707083893\",\n    \"trademarks\": [\n      {\n        \"docNumber\": \"\",\n        \"dateEnd\": \"\",\n        \"trademarkType\": {\n          \"code\": \"RUTM\",\n          \"name\": \"Товарный знак\"\n        },\n        \"image\": null\n      }\n    ]\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Проверка действительности паспорта (/api3/checkPassport) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"complex_by_passport\",\n  \"params\": {\n    \"seria\": \"4510\",\n    \"number\": \"123456\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка действительности паспорта гражданина РФ по базе МВД в формате Kontur.Focus /api3/checkPassport.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "59d90ae5-285b-447f-b972-20e821cc2b39",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"complex_by_passport\",\n  \"params\": {\n    \"seria\": \"4510\",\n    \"number\": \"123456\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"number\": \"4510 123456\",\n    \"isInvalid\": false,\n    \"invalidSince\": null\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Судебные дела и споры (/api3/generalCourtCases) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"pravo_search\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Судебные дела и процессуальные решения в судах общей юрисдикции и арбитраже в формате Kontur.Focus /api3/generalCourtCases.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** Kontur.Focus (через параметр `format: kontur`)."
+              },
+              "response": [
+                {
+                  "id": "7ffeb094-d4e1-4e47-a9bc-2574bdbf0d0a",
+                  "name": "Пример ответа Контур (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"pravo_search\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": null,\n    \"cases\": [\n      {\n        \"caseNumber\": \"02-1234/2026\",\n        \"caseDate\": \"\",\n        \"courtName\": \"\",\n        \"judge\": \"Петров П.П.\",\n        \"participants\": []\n      }\n    ]\n  }\n]"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "03. Боевой контур Production (Kontur формат)",
+          "description": "Боевые вызовы `{{base_url}}` с флагом `format=kontur` для интеграции в существующие системы под формат Контур.Фокус.",
+          "item": [
+            {
+              "name": "Базовые реквизиты ЮЛ (/api3/req - ЕГРЮЛ) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"egrul\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Получение базовых реквизитов организации (ИНН, ОГРН, КПП, руководство, статус, ОКВЭД, уставный капитал) в формате Kontur.Focus /api3/req.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "2728e043-2ed4-4514-9bfa-1922b9f57d9b",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"egrul\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"1027700132195\",\n    \"focusHref\": \"https://focus.kontur.ru/entity?query=7707083893\",\n    \"UL\": {\n      \"kpp\": \"773601001\",\n      \"legalName\": {\n        \"full\": \"ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \\\"СБЕРБАНК РОССИИ\\\"\",\n        \"short\": \"ПАО \\\"СБЕРБАНК\\\"\",\n        \"date\": \"1991-06-20\"\n      },\n      \"legalAddress\": {\n        \"parsedAddressRF\": {\n          \"rawAddress\": \"117312, Г.МОСКВА, УЛ. ВАВИЛОВА, Д.19\"\n        }\n      },\n      \"status\": {\n        \"statusString\": \"Действующее\",\n        \"date\": \"1991-06-20\"\n      },\n      \"heads\": [\n        {\n          \"fio\": \"ГРЕФ ГЕРМАН ОСКАРОВИЧ\",\n          \"position\": \"Президент, Председатель Правления\",\n          \"innfl\": \"770400000000\"\n        }\n      ],\n      \"managementCompanies\": [],\n      \"registrationDate\": \"1991-06-20\",\n      \"statedCapital\": {\n        \"sum\": 67760844000.0\n      }\n    }\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Базовые реквизиты ИП (/api3/req - ЕГРИП) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"egrul_ip\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Получение базовых реквизитов индивидуального предпринимателя в формате Kontur.Focus /api3/req (блок IP).\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "df007cae-4583-4ba8-8499-0ae4d4ce9a4f",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"egrul_ip\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"771234567890\",\n    \"ogrnip\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/entity?query=771234567890\",\n    \"IP\": {\n      \"fio\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n      \"status\": {\n        \"statusString\": \"Действующее\",\n        \"date\": \"2020-05-15\"\n      },\n      \"registrationDate\": \"2020-05-15\"\n    }\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Проверка статуса самозанятого (/api3/smzGetStatus) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"self_employed\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка статуса плательщика налога на профессиональный доход (НПД) в формате Kontur.Focus /api3/smzGetStatus.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "3f38aa5a-cc27-4a64-b2f3-7ccf566e7cf5",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"self_employed\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"taskStatus\": \"Ready\",\n  \"smzStatusResult\": [\n    {\n      \"inn\": \"771234567890\",\n      \"status\": true,\n      \"registrationDate\": \"2021-02-01\",\n      \"message\": \"Физическое лицо является плательщиком налога на профессиональный доход\"\n    }\n  ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ЮЛ (/api3/fssp) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fssp_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка исполнительных производств юридического лица из ФССП в формате Kontur.Focus /api3/fssp.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "1873d184-43d8-4d55-83b2-0fa78e6d6da0",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fssp_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fssp?query=7707083893\",\n    \"fssp\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ФЛ (/api3/fssp) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fssp_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка исполнительных производств физического лица из ФССП в формате Kontur.Focus /api3/fssp.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "8c4403bd-9051-4de2-9359-324a7ce14683",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fssp_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"771234567890\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fssp?query=771234567890\",\n    \"fssp\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов (/api3/fnsBlockedBankAccounts) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fns_block\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Решения налоговых органов (ФНС) о приостановлении операций по счетам налогоплательщика в формате Kontur.Focus /api3/fnsBlockedBankAccounts.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "433ba233-189c-496f-9502-b1296ac32092",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fns_block\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/fnsBlockedBankAccounts?query=7707083893\",\n    \"blockedAccountsInfo\": [\n      {\n        \"updateDate\": \"\",\n        \"totalCount\": 0,\n        \"suspensions\": []\n      }\n    ]\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Банкротство ЮЛ (/api3/companyBankruptcy) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"bankrot_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Сведения о текущей стадии банкротства юридического лица, номере дела и сообщениях ЕФРСБ в формате Kontur.Focus /api3/companyBankruptcy.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "8345ff3e-8469-4520-b8c5-4e3965617dcb",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"bankrot_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": \"\",\n    \"focusHref\": \"https://focus.kontur.ru/bankruptcy?query=7707083893\",\n    \"stage\": \"NO_BANKRUPTCY\",\n    \"caseNumber\": \"\",\n    \"acceptanceDate\": null,\n    \"stageDate\": null,\n    \"messages\": []\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Товарные знаки правообладателя (/api3/trademarks) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"intellectual_property\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Зарегистрированные товарные знаки и интеллектуальная собственность правообладателя в формате Kontur.Focus /api3/trademarks.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "bd6834cd-9570-4659-83aa-406fd88dad76",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"intellectual_property\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": \"7707083893\",\n    \"ogrn\": null,\n    \"focusHref\": \"https://focus.kontur.ru/trademarks?query=7707083893\",\n    \"trademarks\": [\n      {\n        \"docNumber\": \"\",\n        \"dateEnd\": \"\",\n        \"trademarkType\": {\n          \"code\": \"RUTM\",\n          \"name\": \"Товарный знак\"\n        },\n        \"image\": null\n      }\n    ]\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Проверка действительности паспорта (/api3/checkPassport) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"complex_by_passport\",\n  \"params\": {\n    \"seria\": \"4510\",\n    \"number\": \"123456\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка действительности паспорта гражданина РФ по базе МВД в формате Kontur.Focus /api3/checkPassport.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "fff58b16-d954-4665-974c-35fd181a5c86",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"complex_by_passport\",\n  \"params\": {\n    \"seria\": \"4510\",\n    \"number\": \"123456\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"number\": \"4510 123456\",\n    \"isInvalid\": false,\n    \"invalidSince\": null\n  }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Судебные дела и споры (/api3/generalCourtCases) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"pravo_search\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"kontur\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Судебные дела и процессуальные решения в судах общей юрисдикции и арбитраже в формате Kontur.Focus /api3/generalCourtCases.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** Контур.Фокус (KF / Kontur). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "8057784a-fc01-41b7-b0f7-c342fc756ff0",
+                  "name": "Пример ответа Контур (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"pravo_search\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"kontur\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n  {\n    \"inn\": null,\n    \"cases\": [\n      {\n        \"caseNumber\": \"02-1234/2026\",\n        \"caseDate\": \"\",\n        \"courtName\": \"\",\n        \"judge\": \"Петров П.П.\",\n        \"participants\": []\n      }\n    ]\n  }\n]"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variable": [
