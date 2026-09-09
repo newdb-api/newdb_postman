@@ -1,6 +1,6 @@
 {
-  "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
-  "name": "NEWDB Production",
+  "id": "7b8c9d0e-1f2a-3b4c-5d6e-7f8a9b0c1d2e",
+  "name": "NEWDB Sandbox (Test)",
   "values": [
     {
       "key": "base_url",
@@ -16,19 +16,19 @@
     },
     {
       "key": "api_token",
-      "value": "your_api_token_here",
-      "type": "secret",
+      "value": "test_token_newdb_sandbox",
+      "type": "default",
       "enabled": true
     },
     {
       "key": "token",
-      "value": "your_api_token_here",
-      "type": "secret",
+      "value": "test_token_newdb_sandbox",
+      "type": "default",
       "enabled": true
     },
     {
       "key": "api_prod",
-      "value": "https://api.newdb.net/v2",
+      "value": "https://api.newdb.net/test/v2",
       "type": "default",
       "enabled": true
     },

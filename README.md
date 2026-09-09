@@ -11,9 +11,10 @@
 ```
 postman/
 ├── collections/
-│   └── collection.json       # Основная коллекция Postman v2.1.0 (все методы API)
+│   └── collection.json       # Основная коллекция Postman v2.1.0 (все методы API + формат ZB)
 ├── environments/
-│   └── newdb_prod.json       # Окружение Production (base_url, api_token)
+│   ├── newdb_prod.json       # Окружение Production (base_url, test_base_url, api_token)
+│   └── newdb_sandbox.json    # Окружение Sandbox (тестовый контур, test_base_url, format: zb)
 ├── globals/                  # Глобальные переменные Postman
 └── README.md
 ```
@@ -25,19 +26,24 @@ postman/
 1. Откройте **Postman Desktop**.
 2. Нажмите кнопку **Import** (в левом верхнем углу).
 3. Выберите файл `postman/collections/collection.json`.
-4. Также импортируйте файл окружения `postman/environments/newdb_prod.json`.
-5. В правом верхнем углу Postman выберите окружение **NEWDB Production**.
-6. Укажите ваш рабочий токен в переменной окружения `api_token`.
+4. Также импортируйте файлы окружения:
+   - `postman/environments/newdb_sandbox.json` (для бесплатного тестирования без расхода баланса).
+   - `postman/environments/newdb_prod.json` (для боевых запросов).
+5. В правом верхнем углу Postman выберите нужное окружение:
+   - **NEWDB Sandbox (Test)**: преднастроен с тестовым токеном `test_token_newdb_sandbox` и URL `https://api.newdb.net/test/v2`.
+   - **NEWDB Production**: укажите ваш рабочий токен в переменной окружения `api_token`.
 
 ---
 
 ## Переменные окружения
 
-| Переменная | Значение по умолчанию | Описание |
-| :--- | :--- | :--- |
-| `base_url` | `https://api.newdb.net/v2` | Базовый URL сервиса |
-| `api_token` | `your_api_token_here` | Ваш токен доступа (`X-API-KEY`) |
-| `request_id` | `{{$guid}}` | Автоматически сохраняемый UUID запроса |
+| Переменная | Значение Sandbox | Значение Production | Описание |
+| :--- | :--- | :--- | :--- |
+| `test_base_url` | `https://api.newdb.net/test/v2` | `https://api.newdb.net/test/v2` | URL тестового контура Sandbox |
+| `base_url` | `https://api.newdb.net/v2` | `https://api.newdb.net/v2` | Базовый URL боевого сервиса |
+| `api_token` | `test_token_newdb_sandbox` | `your_api_token_here` | Токен доступа (`X-API-KEY`) |
+| `format` | `zb` | `zb` | Формат ответа (по умолчанию `zb` для совместимости) |
+| `request_id` | `{{$guid}}` | `{{$guid}}` | Автоматически сохраняемый UUID запроса |
 
 ---
 
@@ -49,6 +55,10 @@ postman/
 * **`03. Иностранные граждане`** — `rkl` (Реестр контролируемых лиц МВД), `patent_msk`, `foreign_vng`.
 * **`04. Имущество и залоги`** — `pledge_vin` (проверка авто по VIN на залоги в ФНП), `rosreestr`.
 * **`05. ГАС Правосудие и суды`** — `pravo_search` (судебные дела в СОЮ), `kad_event_monitor` (процессуальный контроль конкретного дела КАД).
+* **`06. Формат ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)`** — полная совместимость с форматом ZB:
+  - **`01. Тестовый контур Sandbox (GET запросы)`**: 18 методов с параметром `format=zb` на `{{test_base_url}}/run`.
+  - **`02. Тестовый контур Sandbox (POST запросы)`**: 18 методов на `{{test_base_url}}` с телом `{"method": "...", "params": {...}, "format": "zb"}`.
+  - **`03. Боевой контур Production (ZB формат)`**: 18 методов на `{{base_url}}` в формате ZB.
 
 ---
 

@@ -3300,6 +3300,4514 @@
         }
       ],
       "id": "ec34e40d-1908-475a-97d8-9eb0022027f4"
+    },
+    {
+      "name": "06. Формат ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)",
+      "description": "Коллекция методов NewDB с нативной поддержкой конвертации ответов в формат ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB).\n\nВключает запросы как для тестового контура Sandbox ({{test_base_url}}), так и для боевого API ({{base_url}}).\nПоддерживается передача флага `format=zb` в URL, в JSON-теле POST, либо через HTTP-заголовок `X-Response-Format: zb`.",
+      "item": [
+        {
+          "name": "01. Тестовый контур Sandbox (GET запросы)",
+          "description": "Мгновенные вызовы тестового контура `{{test_base_url}}/run?...&format=zb` без расхода баланса. Возвращают валидные структуры ZB.",
+          "item": [
+            {
+              "name": "Проверка самозанятого (НПД) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=self_employed&inn=771234567890&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "self_employed",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "771234567890",
+                      "description": "ИНН проверяемого физического лица или самозанятого"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка статуса плательщика налога на профессиональный доход (НПД) по ИНН в формате ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB).\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "3c5c4311-2f6a-4a47-b244-f517b19cfc54",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=self_employed&inn=771234567890&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "self_employed",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "771234567890",
+                          "description": "ИНН проверяемого физического лица или самозанятого"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": true,\n    \"inn\": \"771234567890\",\n    \"message\": \"Физическое лицо является плательщиком налога на профессиональный доход\",\n    \"registration_date\": \"2021-02-01\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Выписка ЕГРЮЛ / Карточка компании [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=egrul&inn=7707083893&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "egrul",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Получение базовой карточки юридического лица (ЕГРЮЛ) с руководителями и учредителями в формате ZB card.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "fccb91c4-7b14-44dd-a0fc-9055fc9525d5",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=egrul&inn=7707083893&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "egrul",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"ТипДокумента\": \"ul\",\n    \"ОГРН\": \"1027700132195\",\n    \"ИНН\": \"7707083893\",\n    \"КПП\": \"773601001\",\n    \"НаимЮЛПолн\": \"ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \\\"СБЕРБАНК РОССИИ\\\"\",\n    \"НаимЮЛСокр\": \"ПАО \\\"СБЕРБАНК\\\"\",\n    \"Активность\": \"Действующее\",\n    \"ОбрДата\": \"1991-06-20\",\n    \"ДатаОГРН\": \"1991-06-20\",\n    \"Адрес\": \"117312, Г.МОСКВА, УЛ. ВАВИЛОВА, Д.19\",\n    \"СумКап\": 67760844000.0,\n    \"КодОКВЭД\": \"64.19\",\n    \"НаимОКВЭД\": \"Денежное посредничество прочее\",\n    \"Руководители\": [\n      {\n        \"ФИО\": \"ГРЕФ ГЕРМАН ОСКАРОВИЧ\",\n        \"Должн\": \"Президент, Председатель Правления\",\n        \"ИННФЛ\": \"770400000000\"\n      }\n    ],\n    \"СвУчредит\": [],\n    \"urlCard\": \"https://newdb.net/card/7707083893\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ФЛ (ФССП) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=fssp_person&inn=771234567890&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "fssp_person",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "771234567890",
+                      "description": "ИНН физического лица"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка задолженностей и исполнительных производств физического лица (ФССП) в формате ZB fssp-list.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "f2ecb59c-01b1-44de-af8a-98d9d1686f44",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=fssp_person&inn=771234567890&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "fssp_person",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "771234567890",
+                          "description": "ИНН физического лица"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ЮЛ (ФССП) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=fssp_legal&inn=7707083893&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "fssp_legal",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка исполнительных производств юридического лица (ФССП) в формате ZB fssp-list.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "57eb6107-31f5-4811-a307-7e0be05ab723",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=fssp_legal&inn=7707083893&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "fssp_legal",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Комплексная проверка ФЛ по паспорту [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=complex_by_passport&seria=4510&number=123456&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "complex_by_passport",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "seria",
+                      "value": "4510",
+                      "description": "Серия паспорта РФ"
+                    },
+                    {
+                      "key": "number",
+                      "value": "123456",
+                      "description": "Номер паспорта РФ"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Комплексная проверка физического лица (статус паспорта, ИНН, участие в бизнесе, банкротство, самозанятость) в формате ZB fl-card.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "58fb6e0b-c6cd-4612-a3d6-0cad93286477",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=complex_by_passport&seria=4510&number=123456&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "complex_by_passport",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "seria",
+                          "value": "4510",
+                          "description": "Серия паспорта РФ"
+                        },
+                        {
+                          "key": "number",
+                          "value": "123456",
+                          "description": "Номер паспорта РФ"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"ИННФЛ\": \"771234567890\",\n    \"ФИО\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n    \"РегионПолучИНН\": null,\n    \"РегионВедБизнеса\": null,\n    \"РегионДеятИП\": null,\n    \"МассРуководитель\": false,\n    \"МассУчредитель\": false,\n    \"Руководитель\": [],\n    \"Учредитель\": [],\n    \"ИП\": {\n      \"ОГРНИП\": \"320774600123456\",\n      \"ИННФЛ\": \"771234567890\",\n      \"ФИО\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n      \"ДатаРег\": \"2020-05-15\",\n      \"Статус\": \"ACTIVE\",\n      \"ОКВЭД\": \"62.01\"\n    },\n    \"Самозанятый\": {\n      \"status\": true,\n      \"registration_date\": \"2021-02-01\"\n    },\n    \"Банкрот\": {\n      \"status\": \"NO_BANKRUPTCY\",\n      \"total_records\": 0\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов ЮЛ (ФНС) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=fns_block&inn=7707083893&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "fns_block",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка действующих решений ФНС о приостановлении операций по счетам налогоплательщика в формате ZB bank-restrict.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "1d2d862b-bd07-45af-8902-a64cbf66ae2b",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=fns_block&inn=7707083893&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "fns_block",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"blocked\": false,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Арбитражные дела КАД Арбитр [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=arbitr_case&case_number=А40-12345/2026&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "arbitr_case",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "case_number",
+                      "value": "А40-12345/2026",
+                      "description": "Номер судебного арбитражного дела"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Поиск и карточка арбитражного дела по номеру или участнику в формате ZB court-arbitration.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "2f03a6f7-072f-4e07-a051-9f6f1cfd9fef",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=arbitr_case&case_number=А40-12345/2026&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "arbitr_case",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "case_number",
+                          "value": "А40-12345/2026",
+                          "description": "Номер судебного арбитражного дела"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"точно\": {\n      \"всего\": 1,\n      \"дела\": {\n        \"А40-12345/2026\": {\n          \"НомерДела\": \"А40-12345/2026\",\n          \"Суд\": \"АС города Москвы\",\n          \"Судья\": \"Сидоров С.С.\",\n          \"ДатаРег\": \"2026-02-10\",\n          \"Статус\": \"Рассмотрение завершено\",\n          \"Истец\": [\n            {\n              \"Наименование\": \"ООО \\\"ПРИМЕР ТЕХНОЛОГИИ\\\"\",\n              \"ИНН\": \"7712345678\"\n            }\n          ],\n          \"Ответчик\": [\n            {\n              \"Наименование\": \"ПАО \\\"СБЕРБАНК\\\"\",\n              \"ИНН\": \"7707083893\"\n            }\n          ]\n        }\n      }\n    },\n    \"неточно\": {\n      \"всего\": 0,\n      \"дела\": {}\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Товарные знаки и патенты (Роспатент) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=intellectual_property&inn=7707083893&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "intellectual_property",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН правообладателя"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Интеллектуальная собственность, товарные знаки и патенты правообладателя в формате ZB ТоварЗнак.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "44c75ddf-0499-4fcc-b858-37e722754df6",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=intellectual_property&inn=7707083893&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "intellectual_property",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН правообладателя"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 1,\n    \"ТоварЗнак\": [\n      {\n        \"РегНомер\": \"890123\",\n        \"Название\": \"NEWDB SMART SEARCH\",\n        \"Статус\": \"REGISTERED\",\n        \"МКТУ\": [\n          \"9\",\n          \"35\",\n          \"42\"\n        ],\n        \"ДатаОконч\": \"2034-05-15\"\n      }\n    ],\n    \"Патенты\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Банкротство ЮЛ (Федресурс) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=bankrot_legal&inn=7707083893&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "bankrot_legal",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "7707083893",
+                      "description": "ИНН организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Сведения о процедурах банкротства юридического лица из ЕФРСБ в формате ZB bankrupt-card.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "2a321ff7-e532-492a-ab80-4301cacdbde9",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=bankrot_legal&inn=7707083893&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "bankrot_legal",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "7707083893",
+                          "description": "ИНН организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Статус\": \"NO_BANKRUPTCY\",\n    \"ВсегоЗаписей\": 0,\n    \"Сообщения\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр контролируемых лиц МВД (РКЛ) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=rkl&fio=Иванов Иван Иванович&birth_date=1990-01-01&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "rkl",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "fio",
+                      "value": "Иванов Иван Иванович",
+                      "description": "ФИО иностранного гражданина"
+                    },
+                    {
+                      "key": "birth_date",
+                      "value": "1990-01-01",
+                      "description": "Дата рождения YYYY-MM-DD"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка иностранного гражданина по реестру контролируемых лиц МВД РФ.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "1713a083-8953-46cc-965b-561a95c4d789",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=rkl&fio=Иванов Иван Иванович&birth_date=1990-01-01&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "rkl",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "fio",
+                          "value": "Иванов Иван Иванович",
+                          "description": "ФИО иностранного гражданина"
+                        },
+                        {
+                          "key": "birth_date",
+                          "value": "1990-01-01",
+                          "description": "Дата рождения YYYY-MM-DD"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"in_registry\": false,\n    \"status\": \"CLEAN\",\n    \"description\": \"Субъект отсутствует в реестре контролируемых лиц МВД РФ\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр экстремистов и террористов (Росфинмониторинг) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=terrorist&fio=Иванов Иван Иванович&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "terrorist",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "fio",
+                      "value": "Иванов Иван Иванович",
+                      "description": "ФИО проверяемого лица"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка лица по перечню террористов и экстремистов Росфинмониторинга.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "681efb3e-3446-4376-afa7-21ce8fa8c65a",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=terrorist&fio=Иванов Иван Иванович&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "terrorist",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "fio",
+                          "value": "Иванов Иван Иванович",
+                          "description": "ФИО проверяемого лица"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Реестр\": \"terrorist\",\n    \"Найден\": false,\n    \"Записи\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр иностранных агентов Минюста РФ [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=foreign_agent&fio=Иванов Иван Иванович&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "foreign_agent",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "fio",
+                      "value": "Иванов Иван Иванович",
+                      "description": "ФИО лица или наименование организации"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка лица или организации по реестру иностранных агентов Минюста РФ.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "f2b3cefe-2d6c-4e16-8848-c9f454182dd8",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=foreign_agent&fio=Иванов Иван Иванович&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "foreign_agent",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "fio",
+                          "value": "Иванов Иван Иванович",
+                          "description": "ФИО лица или наименование организации"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": \"VALID\",\n    \"message\": \"Synthetic response for method 'foreign_agent'\",\n    \"params_echo\": {\n      \"fio\": \"Иванов Иван Иванович\",\n      \"method\": \"foreign_agent\",\n      \"country\": \"ru\"\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Массовые учредители (ФНС) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=mass_founders&inn=771234567890&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "mass_founders",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "771234567890",
+                      "description": "ИНН физического лица"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка физического лица на статус массового учредителя по реестру ФНС.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "d57a2a06-a9ba-40bf-b830-5ab36c0f4e89",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=mass_founders&inn=771234567890&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "mass_founders",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "771234567890",
+                          "description": "ИНН физического лица"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Тип\": \"Массовый учредитель\",\n    \"ПризнакМассовости\": false,\n    \"ВсегоКомпаний\": 0,\n    \"Компании\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Массовые руководители (ФНС) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=mass_directors&inn=771234567890&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "mass_directors",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "771234567890",
+                      "description": "ИНН физического лица"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка физического лица на статус массового руководителя по реестру ФНС.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "50bf4ee5-dfbe-4084-8fc9-84b7f7536675",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=mass_directors&inn=771234567890&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "mass_directors",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "771234567890",
+                          "description": "ИНН физического лица"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": \"VALID\",\n    \"message\": \"Synthetic response for method 'mass_directors'\",\n    \"params_echo\": {\n      \"inn\": \"771234567890\",\n      \"method\": \"mass_directors\",\n      \"country\": \"ru\"\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Розыск МВД РФ [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=mvd_wanted&fio=Иванов Иван Иванович&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "mvd_wanted",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "fio",
+                      "value": "Иванов Иван Иванович",
+                      "description": "ФИО разыскиваемого лица"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка физического лица по базе розыска МВД РФ в формате ZB.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "54c15b8a-bd89-45f8-ba2f-2388780defb2",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=mvd_wanted&fio=Иванов Иван Иванович&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "mvd_wanted",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "fio",
+                          "value": "Иванов Иван Иванович",
+                          "description": "ФИО разыскиваемого лица"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Реестр\": \"mvd_wanted\",\n    \"Найден\": false,\n    \"Записи\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов ИП (ФНС) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=fns_block_person&inn=771234567890&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "fns_block_person",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "inn",
+                      "value": "771234567890",
+                      "description": "ИНН предпринимателя"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка блокировок банковских счетов индивидуального предпринимателя в формате ZB bank-restrict.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "b0cd53c6-03e7-4a47-98a1-369cd2c1c11f",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=fns_block_person&inn=771234567890&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "fns_block_person",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "inn",
+                          "value": "771234567890",
+                          "description": "ИНН предпринимателя"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"blocked\": false,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Залоги движимого имущества / авто по VIN (ФНП) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=pledge_vin&vin=XTA210930Y1234567&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "pledge_vin",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "vin",
+                      "value": "XTA210930Y1234567",
+                      "description": "VIN транспортного средства"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Проверка автомобиля по реестру залогов ФНП в формате ZB.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "2857bbc7-7f9c-48c2-adf5-92ed81e5c32f",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=pledge_vin&vin=XTA210930Y1234567&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "pledge_vin",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "vin",
+                          "value": "XTA210930Y1234567",
+                          "description": "VIN транспортного средства"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"vin\": \"XTA21703080000000\",\n    \"is_pledged\": false,\n    \"total_pledges\": 0,\n    \"pledges\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Суды общей юрисдикции (ГАС Правосудие) [GET Sandbox]",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "url": {
+                  "raw": "{{test_base_url}}/run?method=pravo_search&fio=Иванов Иван Иванович&format=zb",
+                  "host": [
+                    "{{test_base_url}}"
+                  ],
+                  "path": [
+                    "run"
+                  ],
+                  "query": [
+                    {
+                      "key": "method",
+                      "value": "pravo_search",
+                      "description": "Имя метода NewDB"
+                    },
+                    {
+                      "key": "fio",
+                      "value": "Иванов Иван Иванович",
+                      "description": "ФИО участника дела"
+                    },
+                    {
+                      "key": "format",
+                      "value": "zb",
+                      "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                    }
+                  ]
+                },
+                "description": "Поиск судебных дел в судах общей юрисдикции по ФИО участника в формате ZB court.\n\n**Контур:** Тестовый (Sandbox - zero latency, баланс не расходуется).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)."
+              },
+              "response": [
+                {
+                  "id": "00256c73-592c-4176-8deb-587cf771436e",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{test_base_url}}/run?method=pravo_search&fio=Иванов Иван Иванович&format=zb",
+                      "host": [
+                        "{{test_base_url}}"
+                      ],
+                      "path": [
+                        "run"
+                      ],
+                      "query": [
+                        {
+                          "key": "method",
+                          "value": "pravo_search",
+                          "description": "Имя метода NewDB"
+                        },
+                        {
+                          "key": "fio",
+                          "value": "Иванов Иван Иванович",
+                          "description": "ФИО участника дела"
+                        },
+                        {
+                          "key": "format",
+                          "value": "zb",
+                          "description": "Флаг формата ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB)"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"точно\": {\n      \"всего\": 1,\n      \"дела\": {\n        \"02-1234/2026\": {\n          \"НомерДела\": \"02-1234/2026\",\n          \"Суд\": \"Басманный районный суд г. Москвы\",\n          \"Судья\": \"Петров П.П.\",\n          \"ДатаРег\": \"2026-08-15\",\n          \"Статус\": \"Дело рассмотрено\",\n          \"Истец\": [],\n          \"Ответчик\": []\n        }\n      }\n    },\n    \"неточно\": {\n      \"всего\": 0,\n      \"дела\": {}\n    }\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "02. Тестовый контур Sandbox (POST запросы)",
+          "description": "Асинхронные/синхронные POST-вызовы `{{test_base_url}}` с телом `{\"method\": \"...\", \"params\": {...}, \"format\": \"zb\"}`.",
+          "item": [
+            {
+              "name": "Проверка самозанятого (НПД) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"self_employed\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка статуса плательщика налога на профессиональный доход (НПД) по ИНН в формате ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB).\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "f11d3ddf-07c0-4f24-accc-2f242571a492",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"self_employed\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": true,\n    \"inn\": \"771234567890\",\n    \"message\": \"Физическое лицо является плательщиком налога на профессиональный доход\",\n    \"registration_date\": \"2021-02-01\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Выписка ЕГРЮЛ / Карточка компании [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"egrul\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Получение базовой карточки юридического лица (ЕГРЮЛ) с руководителями и учредителями в формате ZB card.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "76bd9296-a6b8-4a1a-b441-927031e999e7",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"egrul\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"ТипДокумента\": \"ul\",\n    \"ОГРН\": \"1027700132195\",\n    \"ИНН\": \"7707083893\",\n    \"КПП\": \"773601001\",\n    \"НаимЮЛПолн\": \"ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \\\"СБЕРБАНК РОССИИ\\\"\",\n    \"НаимЮЛСокр\": \"ПАО \\\"СБЕРБАНК\\\"\",\n    \"Активность\": \"Действующее\",\n    \"ОбрДата\": \"1991-06-20\",\n    \"ДатаОГРН\": \"1991-06-20\",\n    \"Адрес\": \"117312, Г.МОСКВА, УЛ. ВАВИЛОВА, Д.19\",\n    \"СумКап\": 67760844000.0,\n    \"КодОКВЭД\": \"64.19\",\n    \"НаимОКВЭД\": \"Денежное посредничество прочее\",\n    \"Руководители\": [\n      {\n        \"ФИО\": \"ГРЕФ ГЕРМАН ОСКАРОВИЧ\",\n        \"Должн\": \"Президент, Председатель Правления\",\n        \"ИННФЛ\": \"770400000000\"\n      }\n    ],\n    \"СвУчредит\": [],\n    \"urlCard\": \"https://newdb.net/card/7707083893\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ФЛ (ФССП) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fssp_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка задолженностей и исполнительных производств физического лица (ФССП) в формате ZB fssp-list.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "e0b1653f-9a71-488b-84f2-620d0d3d7faa",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fssp_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ЮЛ (ФССП) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fssp_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка исполнительных производств юридического лица (ФССП) в формате ZB fssp-list.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "d4946351-ebf9-44c2-a44c-e08b6cdc3776",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fssp_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Комплексная проверка ФЛ по паспорту [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"complex_by_passport\",\n  \"params\": {\n    \"seria\": \"4510\",\n    \"number\": \"123456\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Комплексная проверка физического лица (статус паспорта, ИНН, участие в бизнесе, банкротство, самозанятость) в формате ZB fl-card.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "20e537b1-8cb5-4783-9472-1db54fbdf36d",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"complex_by_passport\",\n  \"params\": {\n    \"seria\": \"4510\",\n    \"number\": \"123456\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"ИННФЛ\": \"771234567890\",\n    \"ФИО\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n    \"РегионПолучИНН\": null,\n    \"РегионВедБизнеса\": null,\n    \"РегионДеятИП\": null,\n    \"МассРуководитель\": false,\n    \"МассУчредитель\": false,\n    \"Руководитель\": [],\n    \"Учредитель\": [],\n    \"ИП\": {\n      \"ОГРНИП\": \"320774600123456\",\n      \"ИННФЛ\": \"771234567890\",\n      \"ФИО\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n      \"ДатаРег\": \"2020-05-15\",\n      \"Статус\": \"ACTIVE\",\n      \"ОКВЭД\": \"62.01\"\n    },\n    \"Самозанятый\": {\n      \"status\": true,\n      \"registration_date\": \"2021-02-01\"\n    },\n    \"Банкрот\": {\n      \"status\": \"NO_BANKRUPTCY\",\n      \"total_records\": 0\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов ЮЛ (ФНС) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fns_block\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка действующих решений ФНС о приостановлении операций по счетам налогоплательщика в формате ZB bank-restrict.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "303a4821-b3ee-42e2-bc46-a0040ad22975",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fns_block\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"blocked\": false,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Арбитражные дела КАД Арбитр [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"arbitr_case\",\n  \"params\": {\n    \"case_number\": \"А40-12345/2026\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Поиск и карточка арбитражного дела по номеру или участнику в формате ZB court-arbitration.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "ff890257-f0e3-4595-a48a-322cc9c57bd5",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"arbitr_case\",\n  \"params\": {\n    \"case_number\": \"А40-12345/2026\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"точно\": {\n      \"всего\": 1,\n      \"дела\": {\n        \"А40-12345/2026\": {\n          \"НомерДела\": \"А40-12345/2026\",\n          \"Суд\": \"АС города Москвы\",\n          \"Судья\": \"Сидоров С.С.\",\n          \"ДатаРег\": \"2026-02-10\",\n          \"Статус\": \"Рассмотрение завершено\",\n          \"Истец\": [\n            {\n              \"Наименование\": \"ООО \\\"ПРИМЕР ТЕХНОЛОГИИ\\\"\",\n              \"ИНН\": \"7712345678\"\n            }\n          ],\n          \"Ответчик\": [\n            {\n              \"Наименование\": \"ПАО \\\"СБЕРБАНК\\\"\",\n              \"ИНН\": \"7707083893\"\n            }\n          ]\n        }\n      }\n    },\n    \"неточно\": {\n      \"всего\": 0,\n      \"дела\": {}\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Товарные знаки и патенты (Роспатент) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"intellectual_property\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Интеллектуальная собственность, товарные знаки и патенты правообладателя в формате ZB ТоварЗнак.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "484146ca-d62a-4d1d-85af-89292bd50eb7",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"intellectual_property\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 1,\n    \"ТоварЗнак\": [\n      {\n        \"РегНомер\": \"890123\",\n        \"Название\": \"NEWDB SMART SEARCH\",\n        \"Статус\": \"REGISTERED\",\n        \"МКТУ\": [\n          \"9\",\n          \"35\",\n          \"42\"\n        ],\n        \"ДатаОконч\": \"2034-05-15\"\n      }\n    ],\n    \"Патенты\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Банкротство ЮЛ (Федресурс) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"bankrot_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Сведения о процедурах банкротства юридического лица из ЕФРСБ в формате ZB bankrupt-card.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "4b7a39b2-980e-4e72-9438-29d73a441299",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"bankrot_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Статус\": \"NO_BANKRUPTCY\",\n    \"ВсегоЗаписей\": 0,\n    \"Сообщения\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр контролируемых лиц МВД (РКЛ) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"rkl\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\",\n    \"birth_date\": \"1990-01-01\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка иностранного гражданина по реестру контролируемых лиц МВД РФ.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "38c252a8-1671-43c1-87a3-f7820f5b44d0",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"rkl\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\",\n    \"birth_date\": \"1990-01-01\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"in_registry\": false,\n    \"status\": \"CLEAN\",\n    \"description\": \"Субъект отсутствует в реестре контролируемых лиц МВД РФ\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр экстремистов и террористов (Росфинмониторинг) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"terrorist\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка лица по перечню террористов и экстремистов Росфинмониторинга.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "a41c437a-6867-4ec7-99ba-27f0db84e4b5",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"terrorist\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Реестр\": \"terrorist\",\n    \"Найден\": false,\n    \"Записи\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр иностранных агентов Минюста РФ [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"foreign_agent\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка лица или организации по реестру иностранных агентов Минюста РФ.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "c7827b9d-b922-46e9-aa95-78facc2f80fb",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"foreign_agent\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": \"VALID\",\n    \"message\": \"Synthetic response for method 'foreign_agent'\",\n    \"params_echo\": {\n      \"fio\": \"Иванов Иван Иванович\",\n      \"method\": \"foreign_agent\",\n      \"country\": \"ru\"\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Массовые учредители (ФНС) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"mass_founders\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка физического лица на статус массового учредителя по реестру ФНС.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "2766be79-c99a-427d-8461-577b05d4783f",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"mass_founders\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Тип\": \"Массовый учредитель\",\n    \"ПризнакМассовости\": false,\n    \"ВсегоКомпаний\": 0,\n    \"Компании\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Массовые руководители (ФНС) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"mass_directors\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка физического лица на статус массового руководителя по реестру ФНС.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "13600022-3d88-4473-8904-85a7549e3870",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"mass_directors\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": \"VALID\",\n    \"message\": \"Synthetic response for method 'mass_directors'\",\n    \"params_echo\": {\n      \"inn\": \"771234567890\",\n      \"method\": \"mass_directors\",\n      \"country\": \"ru\"\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Розыск МВД РФ [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"mvd_wanted\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка физического лица по базе розыска МВД РФ в формате ZB.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "1d7eb54f-b79f-4fd2-adc5-9cf50ff53253",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"mvd_wanted\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Реестр\": \"mvd_wanted\",\n    \"Найден\": false,\n    \"Записи\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов ИП (ФНС) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fns_block_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка блокировок банковских счетов индивидуального предпринимателя в формате ZB bank-restrict.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "3da8dfa0-e8b7-4df4-a9e7-bc14749fe36b",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fns_block_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"blocked\": false,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Залоги движимого имущества / авто по VIN (ФНП) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"pledge_vin\",\n  \"params\": {\n    \"vin\": \"XTA210930Y1234567\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Проверка автомобиля по реестру залогов ФНП в формате ZB.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "d5fea54c-7caa-41cb-9447-72d0d3607424",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"pledge_vin\",\n  \"params\": {\n    \"vin\": \"XTA210930Y1234567\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"vin\": \"XTA21703080000000\",\n    \"is_pledged\": false,\n    \"total_pledges\": 0,\n    \"pledges\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Суды общей юрисдикции (ГАС Правосудие) [POST Sandbox]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Токен доступа NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"pravo_search\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{test_base_url}}",
+                  "host": [
+                    "{{test_base_url}}"
+                  ]
+                },
+                "description": "Поиск судебных дел в судах общей юрисдикции по ФИО участника в формате ZB court.\n\n**Метод вызова:** POST {test_base_url} с телом запроса.\n**Контур:** Тестовый (Sandbox).\n**Формат:** ZB (через параметр `format: zb`)."
+              },
+              "response": [
+                {
+                  "id": "dbd72cce-59fc-4eb2-b896-277751614856",
+                  "name": "Пример ответа ZB (Sandbox 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"pravo_search\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{test_base_url}}",
+                      "host": [
+                        "{{test_base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"точно\": {\n      \"всего\": 1,\n      \"дела\": {\n        \"02-1234/2026\": {\n          \"НомерДела\": \"02-1234/2026\",\n          \"Суд\": \"Басманный районный суд г. Москвы\",\n          \"Судья\": \"Петров П.П.\",\n          \"ДатаРег\": \"2026-08-15\",\n          \"Статус\": \"Дело рассмотрено\",\n          \"Истец\": [],\n          \"Ответчик\": []\n        }\n      }\n    },\n    \"неточно\": {\n      \"всего\": 0,\n      \"дела\": {}\n    }\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "03. Боевой контур Production (ZB формат)",
+          "description": "Боевые вызовы `{{base_url}}` с флагом `format=zb` для интеграции в существующие системы под формат ZB.",
+          "item": [
+            {
+              "name": "Проверка самозанятого (НПД) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"self_employed\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка статуса плательщика налога на профессиональный доход (НПД) по ИНН в формате ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB).\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "58b8931e-8cc9-470b-b8ee-e1bf43c416ab",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"self_employed\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": true,\n    \"inn\": \"771234567890\",\n    \"message\": \"Физическое лицо является плательщиком налога на профессиональный доход\",\n    \"registration_date\": \"2021-02-01\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Выписка ЕГРЮЛ / Карточка компании [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"egrul\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Получение базовой карточки юридического лица (ЕГРЮЛ) с руководителями и учредителями в формате ZB card.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "5b3c8ad9-b917-46ce-8ff5-92c22b4ea43e",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"egrul\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"ТипДокумента\": \"ul\",\n    \"ОГРН\": \"1027700132195\",\n    \"ИНН\": \"7707083893\",\n    \"КПП\": \"773601001\",\n    \"НаимЮЛПолн\": \"ПУБЛИЧНОЕ АКЦИОНЕРНОЕ ОБЩЕСТВО \\\"СБЕРБАНК РОССИИ\\\"\",\n    \"НаимЮЛСокр\": \"ПАО \\\"СБЕРБАНК\\\"\",\n    \"Активность\": \"Действующее\",\n    \"ОбрДата\": \"1991-06-20\",\n    \"ДатаОГРН\": \"1991-06-20\",\n    \"Адрес\": \"117312, Г.МОСКВА, УЛ. ВАВИЛОВА, Д.19\",\n    \"СумКап\": 67760844000.0,\n    \"КодОКВЭД\": \"64.19\",\n    \"НаимОКВЭД\": \"Денежное посредничество прочее\",\n    \"Руководители\": [\n      {\n        \"ФИО\": \"ГРЕФ ГЕРМАН ОСКАРОВИЧ\",\n        \"Должн\": \"Президент, Председатель Правления\",\n        \"ИННФЛ\": \"770400000000\"\n      }\n    ],\n    \"СвУчредит\": [],\n    \"urlCard\": \"https://newdb.net/card/7707083893\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ФЛ (ФССП) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fssp_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка задолженностей и исполнительных производств физического лица (ФССП) в формате ZB fssp-list.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "f716e330-f2fa-490e-88f2-0f0e1e8f20df",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fssp_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Исполнительные производства ЮЛ (ФССП) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fssp_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка исполнительных производств юридического лица (ФССП) в формате ZB fssp-list.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "c30d843d-1308-466b-b3f5-ff7fc5425a88",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fssp_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Комплексная проверка ФЛ по паспорту [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"complex_by_passport\",\n  \"params\": {\n    \"seria\": \"4510\",\n    \"number\": \"123456\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Комплексная проверка физического лица (статус паспорта, ИНН, участие в бизнесе, банкротство, самозанятость) в формате ZB fl-card.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "678c1d7a-5789-422c-9c1d-4b124a371b78",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"complex_by_passport\",\n  \"params\": {\n    \"seria\": \"4510\",\n    \"number\": \"123456\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"ИННФЛ\": \"771234567890\",\n    \"ФИО\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n    \"РегионПолучИНН\": null,\n    \"РегионВедБизнеса\": null,\n    \"РегионДеятИП\": null,\n    \"МассРуководитель\": false,\n    \"МассУчредитель\": false,\n    \"Руководитель\": [],\n    \"Учредитель\": [],\n    \"ИП\": {\n      \"ОГРНИП\": \"320774600123456\",\n      \"ИННФЛ\": \"771234567890\",\n      \"ФИО\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n      \"ДатаРег\": \"2020-05-15\",\n      \"Статус\": \"ACTIVE\",\n      \"ОКВЭД\": \"62.01\"\n    },\n    \"Самозанятый\": {\n      \"status\": true,\n      \"registration_date\": \"2021-02-01\"\n    },\n    \"Банкрот\": {\n      \"status\": \"NO_BANKRUPTCY\",\n      \"total_records\": 0\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов ЮЛ (ФНС) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fns_block\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка действующих решений ФНС о приостановлении операций по счетам налогоплательщика в формате ZB bank-restrict.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "9bf76c85-3de9-45e0-92aa-599b576ef226",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fns_block\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"blocked\": false,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Арбитражные дела КАД Арбитр [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"arbitr_case\",\n  \"params\": {\n    \"case_number\": \"А40-12345/2026\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Поиск и карточка арбитражного дела по номеру или участнику в формате ZB court-arbitration.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "3a967b82-fd7b-4eef-bb5e-f96b730abf82",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"arbitr_case\",\n  \"params\": {\n    \"case_number\": \"А40-12345/2026\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"точно\": {\n      \"всего\": 1,\n      \"дела\": {\n        \"А40-12345/2026\": {\n          \"НомерДела\": \"А40-12345/2026\",\n          \"Суд\": \"АС города Москвы\",\n          \"Судья\": \"Сидоров С.С.\",\n          \"ДатаРег\": \"2026-02-10\",\n          \"Статус\": \"Рассмотрение завершено\",\n          \"Истец\": [\n            {\n              \"Наименование\": \"ООО \\\"ПРИМЕР ТЕХНОЛОГИИ\\\"\",\n              \"ИНН\": \"7712345678\"\n            }\n          ],\n          \"Ответчик\": [\n            {\n              \"Наименование\": \"ПАО \\\"СБЕРБАНК\\\"\",\n              \"ИНН\": \"7707083893\"\n            }\n          ]\n        }\n      }\n    },\n    \"неточно\": {\n      \"всего\": 0,\n      \"дела\": {}\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Товарные знаки и патенты (Роспатент) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"intellectual_property\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Интеллектуальная собственность, товарные знаки и патенты правообладателя в формате ZB ТоварЗнак.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "a1eda1e3-a35e-49a9-9722-ed1a7213778d",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"intellectual_property\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 1,\n    \"ТоварЗнак\": [\n      {\n        \"РегНомер\": \"890123\",\n        \"Название\": \"NEWDB SMART SEARCH\",\n        \"Статус\": \"REGISTERED\",\n        \"МКТУ\": [\n          \"9\",\n          \"35\",\n          \"42\"\n        ],\n        \"ДатаОконч\": \"2034-05-15\"\n      }\n    ],\n    \"Патенты\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Банкротство ЮЛ (Федресурс) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"bankrot_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Сведения о процедурах банкротства юридического лица из ЕФРСБ в формате ZB bankrupt-card.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "dbbb1430-81b4-45f5-9527-37831c37e86c",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"bankrot_legal\",\n  \"params\": {\n    \"inn\": \"7707083893\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Статус\": \"NO_BANKRUPTCY\",\n    \"ВсегоЗаписей\": 0,\n    \"Сообщения\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр контролируемых лиц МВД (РКЛ) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"rkl\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\",\n    \"birth_date\": \"1990-01-01\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка иностранного гражданина по реестру контролируемых лиц МВД РФ.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "77c1190c-fbcb-4062-aa20-823742b15fc9",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"rkl\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\",\n    \"birth_date\": \"1990-01-01\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"in_registry\": false,\n    \"status\": \"CLEAN\",\n    \"description\": \"Субъект отсутствует в реестре контролируемых лиц МВД РФ\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр экстремистов и террористов (Росфинмониторинг) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"terrorist\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка лица по перечню террористов и экстремистов Росфинмониторинга.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "5b950331-a0c8-45ba-b00d-39fc93c82368",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"terrorist\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Реестр\": \"terrorist\",\n    \"Найден\": false,\n    \"Записи\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Реестр иностранных агентов Минюста РФ [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"foreign_agent\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка лица или организации по реестру иностранных агентов Минюста РФ.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "e2f85958-f64f-4820-ae81-114aa4ef4869",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"foreign_agent\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": \"VALID\",\n    \"message\": \"Synthetic response for method 'foreign_agent'\",\n    \"params_echo\": {\n      \"fio\": \"Иванов Иван Иванович\",\n      \"method\": \"foreign_agent\",\n      \"country\": \"ru\"\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Массовые учредители (ФНС) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"mass_founders\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка физического лица на статус массового учредителя по реестру ФНС.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "4e47f40e-dcdd-47bf-9609-84c6c8cb4ad1",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"mass_founders\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Тип\": \"Массовый учредитель\",\n    \"ПризнакМассовости\": false,\n    \"ВсегоКомпаний\": 0,\n    \"Компании\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Массовые руководители (ФНС) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"mass_directors\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка физического лица на статус массового руководителя по реестру ФНС.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "401811ba-5bf3-4992-9aa8-369dd2c26646",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"mass_directors\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"status\": \"VALID\",\n    \"message\": \"Synthetic response for method 'mass_directors'\",\n    \"params_echo\": {\n      \"inn\": \"771234567890\",\n      \"method\": \"mass_directors\",\n      \"country\": \"ru\"\n    }\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Розыск МВД РФ [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"mvd_wanted\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка физического лица по базе розыска МВД РФ в формате ZB.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "74832cc3-5709-4766-85a7-cef77b3c9d2d",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"mvd_wanted\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"Реестр\": \"mvd_wanted\",\n    \"Найден\": false,\n    \"Записи\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Блокировка банковских счетов ИП (ФНС) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"fns_block_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка блокировок банковских счетов индивидуального предпринимателя в формате ZB bank-restrict.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "4c1436f6-6e3d-448d-930a-c5034f9ea7cf",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"fns_block_person\",\n  \"params\": {\n    \"inn\": \"771234567890\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"total\": 0,\n    \"blocked\": false,\n    \"docs\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Залоги движимого имущества / авто по VIN (ФНП) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"pledge_vin\",\n  \"params\": {\n    \"vin\": \"XTA210930Y1234567\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Проверка автомобиля по реестру залогов ФНП в формате ZB.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "ce06b446-1869-4b3e-8657-d0e583045066",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"pledge_vin\",\n  \"params\": {\n    \"vin\": \"XTA210930Y1234567\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"vin\": \"XTA21703080000000\",\n    \"is_pledged\": false,\n    \"total_pledges\": 0,\n    \"pledges\": []\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Суды общей юрисдикции (ГАС Правосудие) [Production]",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{api_token}}",
+                    "type": "text",
+                    "description": "Рабочий API-токен NewDB"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"method\": \"pravo_search\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}",
+                  "host": [
+                    "{{base_url}}"
+                  ]
+                },
+                "description": "Поиск судебных дел в судах общей юрисдикции по ФИО участника в формате ZB court.\n\n**Контур:** Боевой Production (`{base_url}`).\n**Формат ответа:** ЗАПРАВИЛЬНЫЙБИЗНЕС (ZB). Запрос тарифицируется по стандартной сетке NewDB."
+              },
+              "response": [
+                {
+                  "id": "85409a50-38c8-47cc-8b3a-4cdd2bd59183",
+                  "name": "Пример ответа ZB (Production 200 OK)",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      },
+                      {
+                        "key": "X-API-KEY",
+                        "value": "{{api_token}}",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"method\": \"pravo_search\",\n  \"params\": {\n    \"fio\": \"Иванов Иван Иванович\"\n  },\n  \"format\": \"zb\"\n}"
+                    },
+                    "url": {
+                      "raw": "{{base_url}}",
+                      "host": [
+                        "{{base_url}}"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json; charset=utf-8"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"status\": \"200\",\n  \"message\": \"Запрос выполнен успешно\",\n  \"body\": {\n    \"точно\": {\n      \"всего\": 1,\n      \"дела\": {\n        \"02-1234/2026\": {\n          \"НомерДела\": \"02-1234/2026\",\n          \"Суд\": \"Басманный районный суд г. Москвы\",\n          \"Судья\": \"Петров П.П.\",\n          \"ДатаРег\": \"2026-08-15\",\n          \"Статус\": \"Дело рассмотрено\",\n          \"Истец\": [],\n          \"Ответчик\": []\n        }\n      }\n    },\n    \"неточно\": {\n      \"всего\": 0,\n      \"дела\": {}\n    }\n  }\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variable": [
@@ -3312,6 +7820,16 @@
       "id": "44bd3042-3439-47ef-8098-a92e436ec5b6",
       "key": "token",
       "value": ""
+    },
+    {
+      "id": "ab1ccd10-c532-4b3f-9c66-5f44e35491e8",
+      "key": "test_base_url",
+      "value": "https://api.newdb.net/test/v2"
+    },
+    {
+      "id": "4dd12d1c-b0cf-402c-a020-24af270c5975",
+      "key": "base_url",
+      "value": "https://api.newdb.net/v2"
     }
   ]
 }
