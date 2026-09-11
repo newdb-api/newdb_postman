@@ -1703,6 +1703,83 @@
               "body": "{\n  \"params\": {\n    \"inn\": \"7712345678\",\n    \"method\": \"complex_by_inn\",\n    \"country\": \"ru\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000010\",\n  \"datecreated\": \"2026-07-11 21:53:24\",\n  \"state\": \"complete\",\n  \"balance\": 90000,\n  \"steps\": {\n    \"egrul\": {\n      \"status\": \"complete\",\n      \"requestId\": \"00000000-0000-4000-8000-000000000011\"\n    },\n    \"bankrot_legal\": {\n      \"status\": \"complete\",\n      \"requestId\": \"00000000-0000-4000-8000-000000000012\"\n    },\n    \"fssp_legal\": {\n      \"status\": \"complete\",\n      \"requestId\": \"00000000-0000-4000-8000-000000000013\"\n    },\n    \"fns_block\": {\n      \"status\": \"complete\",\n      \"requestId\": \"00000000-0000-4000-8000-000000000014\"\n    },\n    \"pledge_legal\": {\n      \"status\": \"complete\",\n      \"requestId\": \"00000000-0000-4000-8000-000000000015\"\n    },\n    \"arbitr_legal\": {\n      \"status\": \"complete\",\n      \"requestId\": \"00000000-0000-4000-8000-000000000016\"\n    },\n    \"pravo_search_inn\": {\n      \"status\": \"complete\",\n      \"requestId\": \"00000000-0000-4000-8000-000000000017\"\n    },\n    \"pravo_search_company_name\": {\n      \"status\": \"complete\",\n      \"requestId\": \"00000000-0000-4000-8000-000000000018\"\n    }\n  },\n  \"results\": {\n    \"egrul\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000021\",\n      \"dateupdated\": \"2026-07-11 21:54:20\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": [\n          {\n            \"total_items\": 1,\n            \"matches\": [\n              {\n                \"section\": \"ul\",\n                \"inn\": \"7712345678\",\n                \"ogrn\": \"1157746000000\",\n                \"name_short\": \"ООО \\\"ПРИМЕР\\\"\",\n                \"name_full\": \"ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \\\"ПРИМЕР\\\"\",\n                \"status\": \"Действующая организация\",\n                \"region\": \"Г.МОСКВА\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    \"bankrot_legal\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000022\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": []\n      }\n    },\n    \"fssp_legal\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000023\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": []\n      }\n    },\n    \"fns_block\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000024\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": []\n      }\n    },\n    \"pledge_legal\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000025\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": [\n          {\n            \"fnp\": [],\n            \"fedresurs\": [],\n            \"fnp_urls\": []\n          }\n        ]\n      }\n    },\n    \"arbitr_legal\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000026\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": []\n      }\n    },\n    \"pravo_search_inn\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000027\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": [],\n        \"meta\": {\n          \"query\": \"7712345678\",\n          \"count\": 0\n        }\n      }\n    },\n    \"pravo_search_company_name\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000028\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": [],\n        \"meta\": {\n          \"query\": \"ООО \\\"ПРИМЕР\\\"\",\n          \"count\": 0\n        }\n      }\n    },\n    \"management\": {\n      \"500100732259\": {\n        \"innfiz\": \"500100732259\",\n        \"name\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n        \"roles\": [\n          {\n            \"role\": \"director\",\n            \"index\": 1,\n            \"position\": \"ГЕНЕРАЛЬНЫЙ ДИРЕКТОР\"\n          }\n        ],\n        \"steps\": {\n          \"egrul_ip\": {\n            \"status\": \"complete\",\n            \"requestId\": \"00000000-0000-4000-8000-000000000031\"\n          },\n          \"bankrot_person\": {\n            \"status\": \"complete\",\n            \"requestId\": \"00000000-0000-4000-8000-000000000032\"\n          },\n          \"arbitr_person\": {\n            \"status\": \"complete\",\n            \"requestId\": \"00000000-0000-4000-8000-000000000033\"\n          },\n          \"nalog_debt\": {\n            \"status\": \"complete\",\n            \"requestId\": \"00000000-0000-4000-8000-000000000034\"\n          },\n          \"fns_block_person\": {\n            \"status\": \"complete\",\n            \"requestId\": \"00000000-0000-4000-8000-000000000035\"\n          },\n          \"pledge_person\": {\n            \"status\": \"complete\",\n            \"requestId\": \"00000000-0000-4000-8000-000000000036\"\n          },\n          \"pravo_search\": {\n            \"status\": \"complete\",\n            \"requestId\": \"00000000-0000-4000-8000-000000000037\"\n          }\n        },\n        \"results\": {\n          \"egrul_ip\": {\n            \"taskId\": \"00000000-0000-4000-8000-000000000041\",\n            \"result\": {\n              \"status\": 200,\n              \"data\": []\n            }\n          },\n          \"bankrot_person\": {\n            \"taskId\": \"00000000-0000-4000-8000-000000000042\",\n            \"result\": {\n              \"status\": 200,\n              \"data\": []\n            }\n          },\n          \"arbitr_person\": {\n            \"taskId\": \"00000000-0000-4000-8000-000000000043\",\n            \"result\": {\n              \"status\": 200,\n              \"data\": []\n            }\n          },\n          \"nalog_debt\": {\n            \"taskId\": \"00000000-0000-4000-8000-000000000044\",\n            \"result\": {\n              \"status\": 200,\n              \"data\": []\n            }\n          },\n          \"fns_block_person\": {\n            \"taskId\": \"00000000-0000-4000-8000-000000000045\",\n            \"result\": {\n              \"status\": 200,\n              \"data\": []\n            }\n          },\n          \"pledge_person\": {\n            \"taskId\": \"00000000-0000-4000-8000-000000000046\",\n            \"result\": {\n              \"status\": 200,\n              \"data\": []\n            }\n          },\n          \"pravo_search\": {\n            \"taskId\": \"00000000-0000-4000-8000-000000000047\",\n            \"result\": {\n              \"status\": 200,\n              \"data\": [],\n              \"meta\": {\n                \"query\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n                \"count\": 0\n              }\n            }\n          }\n        }\n      }\n    }\n  },\n  \"finished_at\": \"2026-07-11 21:55:10\"\n}"
             }
           ]
+        },
+        {
+          "name": "Бухгалтерская отчетность (ГИР БО / ФНС)",
+          "id": "3e986d6b-99a6-4ce3-a49a-3479cde6102f",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"inn\": \"7712345678\",\n    \"country\": \"ru\",\n    \"method\": \"fns_bo\"\n  },\n  \"webhook\": \"https://example.com/newdb-webhook\",\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "Бухгалтерская (финансовая) отчетность организации из ГИР БО ФНС России и реестра доходов/расходов по ИНН.\n\nMethod: \nDocs: https://newdb.net/docs/legal/09-fns_bo/\n\nЗапрос отправляется на . Авторизация: заголовок ."
+          },
+          "response": [
+            {
+              "id": "1013ef99-f9a4-4344-93c5-77d37dd09fe2",
+              "name": "complete",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"params\": {\n    \"inn\": \"7712345678\",\n    \"country\": \"ru\",\n    \"method\": \"fns_bo\"\n  },\n  \"webhook\": \"https://example.com/newdb-webhook\",\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\"\n}"
+                },
+                "url": {
+                  "raw": "{{api_prod}}",
+                  "host": [
+                    "{{api_prod}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"params\": {\n    \"inn\": \"7712345678\",\n    \"country\": \"ru\",\n    \"method\": \"fns_bo\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\",\n  \"datecreated\": \"2026-09-11 13:42:15\",\n  \"state\": \"complete\",\n  \"balance\": 90000,\n  \"results\": {\n    \"fns_bo\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000002\",\n      \"dateupdated\": \"2026-09-11 13:42:15\",\n      \"result\": {\n        \"status\": 200,\n        \"found\": true,\n        \"inn\": \"7712345678\",\n        \"organization\": {\n          \"inn\": \"7712345678\",\n          \"ogrn\": \"1157746102535\",\n          \"kpp\": \"770701001\",\n          \"short_name\": \"\\u041e\\u041e\\u041e \\\"\\u041a\\u041e\\u041c\\u041f\\u0410\\u041d\\u0418\\u042f\\\"\",\n          \"full_name\": \"\\u041e\\u0411\\u0429\\u0415\\u0421\\u0422\\u0412\\u041e \\u0421 \\u041e\\u0413\\u0420\\u0410\\u041d\\u0418\\u0427\\u0415\\u041d\\u041d\\u041e\\u0419 \\u041e\\u0422\\u0412\\u0415\\u0422\\u0421\\u0422\\u0412\\u0415\\u041d\\u041d\\u041e\\u0421\\u0422\\u042c\\u042e \\\"\\u041a\\u041e\\u041c\\u041f\\u0410\\u041d\\u0418\\u042f\\\"\",\n          \"address\": \"127473, \\u0413. \\u041c\\u041e\\u0421\\u041a\\u0412\\u0410, \\u0423\\u041b. \\u041f\\u0420\\u0418\\u041c\\u0415\\u0420\\u041d\\u0410\\u042f, \\u0414. 1\",\n          \"status\": \"ACTIVE\"\n        },\n        \"financial_summary\": [\n          {\n            \"inn\": \"7712345678\",\n            \"org_name\": \"\\u041e\\u041e\\u041e \\\"\\u041a\\u041e\\u041c\\u041f\\u0410\\u041d\\u0418\\u042f\\\"\",\n            \"year\": 2024,\n            \"period\": \"2024\",\n            \"revenue\": 150000.0,\n            \"cost_of_sales\": 95000.0,\n            \"gross_profit\": 55000.0,\n            \"other_expenses\": 5000.0,\n            \"net_profit\": 42000.0,\n            \"assets\": 180000.0,\n            \"capital\": 120000.0,\n            \"short_term_debt\": 40000.0,\n            \"long_term_debt\": 20000.0,\n            \"has_audit\": false,\n            \"has_explanations\": false,\n            \"opendata_income\": 150000.0,\n            \"opendata_expense\": 108000.0,\n            \"source\": \"merged\"\n          }\n        ],\n        \"data\": [\n          {\n            \"inn\": \"7712345678\",\n            \"org_name\": \"\\u041e\\u041e\\u041e \\\"\\u041a\\u041e\\u041c\\u041f\\u0410\\u041d\\u0418\\u042f\\\"\",\n            \"year\": 2024,\n            \"period\": \"2024\",\n            \"revenue\": 150000.0,\n            \"cost_of_sales\": 95000.0,\n            \"gross_profit\": 55000.0,\n            \"other_expenses\": 5000.0,\n            \"net_profit\": 42000.0,\n            \"assets\": 180000.0,\n            \"capital\": 120000.0,\n            \"short_term_debt\": 40000.0,\n            \"long_term_debt\": 20000.0,\n            \"has_audit\": false,\n            \"has_explanations\": false,\n            \"opendata_income\": 150000.0,\n            \"opendata_expense\": 108000.0,\n            \"source\": \"merged\"\n          }\n        ]\n      }\n    }\n  }\n}"
+            }
+          ]
         }
       ],
       "id": "b368f06d-1b62-5ee5-b8ce-0e0c2f9168e9"
