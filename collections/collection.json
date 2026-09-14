@@ -3145,6 +3145,83 @@
           ]
         },
         {
+          "name": "Проверка авто по VIN (Госуслуги)",
+          "id": "a82b9415-3f1a-4e20-8012-78d123e45678",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"vin\": \"X4XWY39460L583993\",\n    \"method\": \"vin_check\",\n    \"get_screen\": 0\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000003\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "Метод выполняет онлайн-проверку автомобиля по VIN через форму портала Госуслуг (розыск, ограничения, залог в ФНП, розыск ПТС и техданные).\n\nMethod: `vin_check`\nDocs: https://newdb.net/docs/property/07-vin_check/\n\nЗапрос отправляется на `POST https://api.newdb.net/v2`. Авторизация: заголовок `X-API-KEY: {{token}}`."
+          },
+          "response": [
+            {
+              "id": "e3b48291-72a1-4320-91a5-812d45678901",
+              "name": "complete",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"params\": {\n    \"vin\": \"X4XWY39460L583993\",\n    \"method\": \"vin_check\",\n    \"get_screen\": 0\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000003\"\n}"
+                },
+                "url": {
+                  "raw": "{{api_prod}}",
+                  "host": [
+                    "{{api_prod}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"params\": {\n    \"vin\": \"X4XWY39460L583993\",\n    \"method\": \"vin_check\",\n    \"get_screen\": 0\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000003\",\n  \"datecreated\": \"2026-09-13 22:15:40\",\n  \"state\": \"complete\",\n  \"balance\": 90000,\n  \"results\": {\n    \"vin_check\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000003\",\n      \"dateupdated\": \"2026-09-13 22:15:40\",\n      \"result\": {\n        \"status\": 200,\n        \"found\": true,\n        \"data\": [\n          {\n            \"vin\": \"X4XWY39460L583993\",\n            \"body_number\": \"X4XWY39460L583993\",\n            \"chassis_number\": null,\n            \"brand_model\": \"BMW X3\",\n            \"year\": \"2020\",\n            \"color\": \"Черный\",\n            \"category\": \"B\",\n            \"power_hp\": \"190\",\n            \"power_kw\": \"140\",\n            \"engine_volume\": \"1995\",\n            \"engine_type\": \"Дизельный\",\n            \"eco_class\": \"Пятый\",\n            \"max_weight\": \"2420\",\n            \"curb_weight\": \"1825\",\n            \"is_wanted\": false,\n            \"wanted_text\": \"Нет\",\n            \"has_restrictions\": false,\n            \"restrictions_text\": \"Нет\",\n            \"restrictions_details\": [],\n            \"has_pts_wanted\": false,\n            \"wanted_pts_text\": \"Нет\",\n            \"is_pledged\": false,\n            \"pledge_text\": \"Нет\",\n            \"pledge_details\": [],\n            \"report_url\": \"https://www.gosuslugi.ru/600308/1/form?external&screenId=s3&q1=X4XWY39460L583993&l1=\"\n          }\n        ]\n      }\n    }\n  },\n  \"finished_at\": \"2026-09-13 22:15:41\"\n}"
+            }
+          ]
+        },
+        {
           "name": "Геоданные по кадастровому номеру",
           "id": "e9f1f4b4-6a0c-52eb-b305-6edaa10631ac",
           "request": {
