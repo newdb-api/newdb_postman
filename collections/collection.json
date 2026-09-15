@@ -1232,7 +1232,7 @@
                 "{{api_prod}}"
               ]
             },
-            "description": "Поиск патентов и объектов интеллектуальной собственности в Роспатенте (ФИПС).\n\nDocs: https://newdb.net/docs/fiz/18-intellectual_property/"
+            "description": "Комплексный поиск патентов, программ для ЭВМ, баз данных и товарных знаков в Роспатенте (ФИПС).\n\nDocs: https://newdb.net/docs/fiz/18-intellectual_property/"
           },
           "response": []
         }
