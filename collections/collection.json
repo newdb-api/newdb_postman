@@ -2285,6 +2285,159 @@
             "description": "Метод выполняет процессуальный мониторинг конкретного арбитражного дела: формирует снимок (snapshot), хронологию событий, риски, дельту изменений (delta) и AI-интерпретацию.\n\nMethod: `kad_event_monitor`\nDocs: https://newdb.net/docs/legal/08-kad_event_monitor/\n\nЗапрос отправляется на `POST https://api.newdb.net/v2`. Авторизация: заголовок `X-API-KEY: {{token}}`."
           },
           "response": []
+        },
+        {
+          "name": "Арбитраж по компаниям физлица (court_arbitration)",
+          "id": "5cdd7d6b-6d55-5517-9a00-e8e41ef69422",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "f49ae01d-3a0c-5823-913f-573ce53e03fa",
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data && data.requestId) {",
+                  "    pm.collectionVariables.set('request_id', data.requestId);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"innfiz\": \"500100732259\",\n    \"country\": \"ru\",\n    \"method\": \"court_arbitration\",\n    \"company_limit\": 10\n  },\n  \"requestId\": \"72d6bc93-5953-5801-aca2-d55a8223a137\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "Составной метод: по ИНН физлица находит компании, где лицо является руководителем или учредителем (ЕГРЮЛ-связи), агрегирует их арбитражные дела из КАД с суммами требований из AI-разбора судебных PDF и рассчитывает прозрачный скоринг субсидиарного риска (`subsidiary_liability_score`). Стоимость динамическая: 1 единица за поиск связей + 1 за каждую компанию.\n\nMethod: `court_arbitration`\nDocs: https://newdb.net/docs/fiz/21-court_arbitration/\n\nЗапрос отправляется на `POST https://api.newdb.net/v2`. Авторизация: заголовок `X-API-KEY: {{token}}`."
+          },
+          "response": []
+        },
+        {
+          "name": "Сумма арбитражных задолженностей физлица (arbitr_debt_sum)",
+          "id": "44723609-9077-5acd-9597-6e63f28e2c45",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "a1c32854-040b-52f9-9723-55db071cdc6c",
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data && data.requestId) {",
+                  "    pm.collectionVariables.set('request_id', data.requestId);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"innfiz\": \"500100732259\",\n    \"country\": \"ru\",\n    \"method\": \"arbitr_debt_sum\",\n    \"max_cases\": 20\n  },\n  \"requestId\": \"a484e280-33b2-5f47-9f33-ed1c6b994dd8\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "По ИНН физлица агрегирует сумму задолженностей по арбитражным делам из КАД: роль лица в каждом деле (должник/взыскатель), суммы требований из AI-разбора PDF судебных актов и сводка `debt_summary` с честным `amount_status` (complete/partial/unavailable/no_cases) — недоступные суммы не превращаются в ложный ноль.\n\nMethod: `arbitr_debt_sum`\nDocs: https://newdb.net/docs/fiz/22-arbitr_debt_sum/\n\nЗапрос отправляется на `POST https://api.newdb.net/v2`. Авторизация: заголовок `X-API-KEY: {{token}}`."
+          },
+          "response": []
+        },
+        {
+          "name": "Долги ФССП по связанным компаниям (fssp_company)",
+          "id": "e4a7d812-7b34-5821-b0e2-8fa2981ce810",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "b2c3d4e5-1122-3344-5566-778899aabbcc",
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data && data.requestId) {",
+                  "    pm.collectionVariables.set('request_id', data.requestId);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"inn\": \"771234567890\",\n    \"country\": \"ru\",\n    \"method\": \"fssp_company\",\n    \"max_companies\": 20,\n    \"only_active\": true\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "По ИНН физлица находит юридические лица, где лицо является руководителем или учредителем (ЕГРЮЛ), и проверяет их на наличие исполнительных производств в базе ФССП РФ с расчетом совокупного долга бизнеса.\n\nMethod: `fssp_company`\nDocs: https://newdb.net/docs/fiz/24-fssp_company/\n\nЗапрос отправляется на `POST https://api.newdb.net/v2`. Авторизация: заголовок `X-API-KEY: {{token}}`."
+          },
+          "response": []
         }
       ]
     },
@@ -3448,7 +3601,7 @@
                 }
               ],
               "cookie": [],
-              "body": "{\n  \"params\": {\n    \"method\": \"intellectual_property\",\n    \"query\": \"Иванов Иван Иванович\",\n    \"limit\": 10,\n    \"offset\": 0\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000003\",\n  \"datecreated\": \"2026-09-08 12:00:00\",\n  \"state\": \"complete\",\n  \"balance\": 90000,\n  \"results\": {\n    \"intellectual_property\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000004\",\n      \"dateupdated\": \"2026-09-08 12:00:05\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": {\n          \"total\": 1,\n          \"items\": [\n            {\n              \"id\": \"RU2024100123A\",\n              \"registration_number\": \"2750123\",\n              \"application_number\": \"2024100123\",\n              \"title\": \"Способ управления распределенной вычислительной сетью\",\n              \"patent_type\": \"Изобретение\",\n              \"authors\": [\"Иванов Иван Иванович\"],\n              \"patent_holders\": [\"ООО Пример Инновации\"],\n              \"filing_date\": \"2024-01-15\",\n              \"registration_date\": \"2025-06-20\",\n              \"status\": \"Действует\"\n            }\n          ]\n        }\n      }\n    }\n  },\n  \"finished_at\": \"2026-09-08 12:00:06\"\n}"
+              "body": "{\n  \"params\": {\n    \"method\": \"intellectual_property\",\n    \"query\": \"Иванов Иван Иванович\",\n    \"limit\": 10,\n    \"offset\": 0\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000003\",\n  \"datecreated\": \"2026-09-08 12:00:00\",\n  \"state\": \"complete\",\n  \"balance\": 90000,\n  \"results\": {\n    \"intellectual_property\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000004\",\n      \"dateupdated\": \"2026-09-08 12:00:05\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": [\n          {\n            \"id\": \"RU2024100123A\",\n            \"registration_number\": \"2750123\",\n            \"application_number\": \"2024100123\",\n            \"title\": \"Способ управления распределенной вычислительной сетью\",\n            \"patent_type\": \"Изобретение\",\n            \"authors\": [\n              \"Иванов Иван Иванович\"\n            ],\n            \"patent_holders\": [\n              \"ООО Пример Инновации\"\n            ],\n            \"filing_date\": \"2024-01-15\",\n            \"registration_date\": \"2025-06-20\",\n            \"status\": \"Действует\"\n          }\n        ],\n        \"summary\": {\n          \"total\": 1,\n          \"patents_count\": 1,\n          \"programs_count\": 0,\n          \"trademarks_count\": 0\n        }\n      }\n    }\n  },\n  \"finished_at\": \"2026-09-08 12:00:06\"\n}"
             }
           ]
         }
