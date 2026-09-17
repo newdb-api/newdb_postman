@@ -1235,6 +1235,42 @@
             "description": "Комплексный поиск патентов, программ для ЭВМ, баз данных и товарных знаков в Роспатенте (ФИПС).\n\nDocs: https://newdb.net/docs/fiz/18-intellectual_property/"
           },
           "response": []
+        },
+        {
+          "name": "Проверка водительского удостоверения",
+          "id": "e17484ff-6772-4257-bb72-500e77222f26",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"num\": \"99 01 123456\",\n    \"lastname\": \"Иванов\",\n    \"firstname\": \"Иван\",\n    \"secondname\": \"Иванович\",\n    \"birthdate\": \"1990-01-01\",\n    \"method\": \"driver_license\",\n    \"country\": \"ru\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "Проверяет действительность водительского удостоверения, категории ТС, срок действия и сведения о лишении прав через Госуслуги и ГИБДД.\n\nMethod: \nDocs: https://newdb.net/docs/fiz/25-driver_license/\n\nЗапрос отправляется на . Авторизация: заголовок ."
+          },
+          "response": []
         }
       ],
       "id": "4ff61488-ade0-4afa-80dd-9dc978eff6c1"
