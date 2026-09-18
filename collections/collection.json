@@ -1308,6 +1308,53 @@
           "response": []
         },
         {
+          "name": "Санкции и PEP — OpenSanctions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data.requestId) pm.collectionVariables.set('request_id', data.requestId);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"method\": \"opensanctions\",\n    \"country\": \"ru\",\n    \"query\": \"ИВАНОВ ИВАН ИВАНОВИЧ\",\n    \"inn\": \"500100732259\",\n    \"birth_date\": \"1980-01-01\",\n    \"max_results\": 25\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "Method: `opensanctions`\\nDocs: https://newdb.net/docs/fiz/27-opensanctions/"
+          },
+          "response": []
+        },
+        {
           "name": "Розыск ФСИН",
           "request": {
             "method": "POST",
