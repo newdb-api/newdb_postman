@@ -1968,6 +1968,93 @@
               "body": "{\n  \"params\": {\n    \"inn\": \"7712345678\",\n    \"country\": \"ru\",\n    \"method\": \"fns_bo\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\",\n  \"datecreated\": \"2026-09-11 13:42:15\",\n  \"state\": \"complete\",\n  \"balance\": 90000,\n  \"results\": {\n    \"fns_bo\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000002\",\n      \"dateupdated\": \"2026-09-11 13:42:15\",\n      \"result\": {\n        \"status\": 200,\n        \"found\": true,\n        \"inn\": \"7712345678\",\n        \"organization\": {\n          \"inn\": \"7712345678\",\n          \"ogrn\": \"1157746102535\",\n          \"kpp\": \"770701001\",\n          \"short_name\": \"\\u041e\\u041e\\u041e \\\"\\u041a\\u041e\\u041c\\u041f\\u0410\\u041d\\u0418\\u042f\\\"\",\n          \"full_name\": \"\\u041e\\u0411\\u0429\\u0415\\u0421\\u0422\\u0412\\u041e \\u0421 \\u041e\\u0413\\u0420\\u0410\\u041d\\u0418\\u0427\\u0415\\u041d\\u041d\\u041e\\u0419 \\u041e\\u0422\\u0412\\u0415\\u0422\\u0421\\u0422\\u0412\\u0415\\u041d\\u041d\\u041e\\u0421\\u0422\\u042c\\u042e \\\"\\u041a\\u041e\\u041c\\u041f\\u0410\\u041d\\u0418\\u042f\\\"\",\n          \"address\": \"127473, \\u0413. \\u041c\\u041e\\u0421\\u041a\\u0412\\u0410, \\u0423\\u041b. \\u041f\\u0420\\u0418\\u041c\\u0415\\u0420\\u041d\\u0410\\u042f, \\u0414. 1\",\n          \"status\": \"ACTIVE\"\n        },\n        \"financial_summary\": [\n          {\n            \"inn\": \"7712345678\",\n            \"org_name\": \"\\u041e\\u041e\\u041e \\\"\\u041a\\u041e\\u041c\\u041f\\u0410\\u041d\\u0418\\u042f\\\"\",\n            \"year\": 2024,\n            \"period\": \"2024\",\n            \"revenue\": 150000.0,\n            \"cost_of_sales\": 95000.0,\n            \"gross_profit\": 55000.0,\n            \"other_expenses\": 5000.0,\n            \"net_profit\": 42000.0,\n            \"assets\": 180000.0,\n            \"capital\": 120000.0,\n            \"short_term_debt\": 40000.0,\n            \"long_term_debt\": 20000.0,\n            \"has_audit\": false,\n            \"has_explanations\": false,\n            \"opendata_income\": 150000.0,\n            \"opendata_expense\": 108000.0,\n            \"source\": \"merged\"\n          }\n        ],\n        \"data\": [\n          {\n            \"inn\": \"7712345678\",\n            \"org_name\": \"\\u041e\\u041e\\u041e \\\"\\u041a\\u041e\\u041c\\u041f\\u0410\\u041d\\u0418\\u042f\\\"\",\n            \"year\": 2024,\n            \"period\": \"2024\",\n            \"revenue\": 150000.0,\n            \"cost_of_sales\": 95000.0,\n            \"gross_profit\": 55000.0,\n            \"other_expenses\": 5000.0,\n            \"net_profit\": 42000.0,\n            \"assets\": 180000.0,\n            \"capital\": 120000.0,\n            \"short_term_debt\": 40000.0,\n            \"long_term_debt\": 20000.0,\n            \"has_audit\": false,\n            \"has_explanations\": false,\n            \"opendata_income\": 150000.0,\n            \"opendata_expense\": 108000.0,\n            \"source\": \"merged\"\n          }\n        ]\n      }\n    }\n  }\n}"
             }
           ]
+        },
+        {
+          "name": "Проверки бизнеса (ЕРКНМ / proverki.gov.ru)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data.requestId) pm.collectionVariables.set('request_id', data.requestId);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"inn\": \"7712345678\",\n    \"country\": \"ru\",\n    \"method\": \"proverki_knm\",\n    \"max_pages\": 5\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000501\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "Поиск плановых и внеплановых контрольных (надзорных) мероприятий по ИНН организации или ИП в ФГИС ЕРП / ЕРКНМ Генеральной прокуратуры РФ (proverki.gov.ru).\n\nMethod: `proverki_knm`\nDocs: https://newdb.net/docs/legal/12-proverki_knm/\n\nЗапрос отправляется на `POST https://api.newdb.net/v2`. Авторизация: заголовок `X-API-KEY: {{token}}`."
+          },
+          "response": [
+            {
+              "name": "complete",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"params\": {\n    \"inn\": \"7712345678\",\n    \"country\": \"ru\",\n    \"method\": \"proverki_knm\",\n    \"max_pages\": 5\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000501\"\n}"
+                },
+                "url": {
+                  "raw": "{{api_prod}}",
+                  "host": [
+                    "{{api_prod}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"params\": {\n    \"inn\": \"7712345678\",\n    \"country\": \"ru\",\n    \"method\": \"proverki_knm\",\n    \"max_pages\": 5\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000501\",\n  \"datecreated\": \"2026-09-21 17:00:00\",\n  \"state\": \"complete\",\n  \"balance\": 9950,\n  \"results\": {\n    \"proverki_knm\": {\n      \"result\": {\n        \"status\": 200,\n        \"found\": true,\n        \"total\": 1,\n        \"data\": [\n          {\n            \"id\": \"29032018\",\n            \"number\": \"77260061000218959930\",\n            \"federal_law\": \"248\",\n            \"inn\": \"7712345678\",\n            \"ogrn\": \"1037700000000\",\n            \"company_name\": \"ООО \\\"ПРИМЕР\\\"\",\n            \"month_start\": \"Ноябрь 2026 года.\",\n            \"control_org_name\": \"Главное управление МЧС России по г. Москве\",\n            \"prosecutor_org_name\": \"Прокуратура г. Москвы\",\n            \"details_url\": \"https://proverki.gov.ru/portal/public-knm/29032018\",\n            \"knm_type\": \"Плановое КНМ\",\n            \"term\": \"10 дней 80.0 часов\",\n            \"address\": \"г Москва, ул Примерная, д 1\",\n            \"carryout_name\": \"Выездная проверка\",\n            \"decision\": false\n          }\n        ]\n      }\n    }\n  }\n}"
+            }
+          ]
         }
       ],
       "id": "b368f06d-1b62-5ee5-b8ce-0e0c2f9168e9"
