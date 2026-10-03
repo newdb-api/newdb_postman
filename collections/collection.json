@@ -97,6 +97,95 @@
           ]
         },
         {
+          "name": "ФССП по номеру ИП",
+          "id": "7806bd9a-1ea0-4a0e-b4f9-e7b7be4a60c2",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-API-KEY",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"params\": {\n    \"method\": \"fssp_case\",\n    \"country\": \"ru\",\n    \"case_number\": \"88442/25/66049-ИП\"\n  },\n  \"webhook\": \"https://example.com/newdb-webhook\",\n  \"requestId\": \"00000000-0000-4000-8000-000000000101\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{api_prod}}",
+              "host": [
+                "{{api_prod}}"
+              ]
+            },
+            "description": "Метод осуществляет поиск записи в банке данных исполнительных производств ФССП по номеру исполнительного производства (например, 88442/25/66049-ИП).\n\nMethod: \nDocs: https://newdb.net/docs/fiz/02-fssp_case/\n\nЗапрос отправляется на . Авторизация: заголовок ."
+          },
+          "response": [
+            {
+              "id": "013151f2-d843-4f87-bb72-e8633c8659f8",
+              "name": "complete",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-API-KEY",
+                    "value": "{{token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"params\": {\n    \"method\": \"fssp_case\",\n    \"country\": \"ru\",\n    \"case_number\": \"88442/25/66049-ИП\"\n  },\n  \"webhook\": \"https://example.com/newdb-webhook\",\n  \"requestId\": \"00000000-0000-4000-8000-000000000101\"\n}"
+                },
+                "url": {
+                  "raw": "{{api_prod}}",
+                  "host": [
+                    "{{api_prod}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"params\": {\n    \"method\": \"fssp_case\",\n    \"country\": \"ru\",\n    \"case_number\": \"88442/25/66049-ИП\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000101\",\n  \"datecreated\": \"2026-07-12 12:00:00\",\n  \"state\": \"complete\",\n  \"balance\": 90000,\n  \"results\": {\n    \"fssp_case\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000101\",\n      \"dateupdated\": \"2026-07-12 12:00:10\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": [\n          {\n            \"Debtor\": \"ИВАНОВ ИВАН ИВАНОВИЧ 01.01.1990 Г. МОСКВА\",\n            \"EnforcementProceeding\": \"88442/25/66049-ИП от 09.09.2025\",\n            \"WritDetails\": \"Исполнительный лист от 01.01.2026 № 00RS0000#2-1/2026#1 ПРИМЕРНЫЙ СУД\",\n            \"CompletionDateOrReason\": \"\",\n            \"Service\": \"\",\n            \"SubjectAndDebtAmount\": \"Иные взыскания имущественного характера. Сумма долга: 30000.00 руб.\",\n            \"BailiffDepartment\": \"Примерный РОСП 000000, Россия, г. Москва, ул. Примерная, д. 1\",\n            \"Phone\": \"+7(000)000-00-00\",\n            \"BailiffOfficer\": \"ИВАНОВ И. И.\"\n          }\n        ]\n      }\n    }\n  },\n  \"finished_at\": \"2026-07-12 12:00:11\"\n}"
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const result = pm.response.json();",
+                  "if (result.requestId) { pm.collectionVariables.set(\"request_id\", result.requestId); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
           "name": "Проверка паспорта и ИНН через ФНС",
           "id": "680f2313-6949-425b-b88e-e75ed70cd726",
           "request": {
@@ -3499,7 +3588,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"params\": {\n    \"method\": \"patent_msk\",\n    \"id_doc_seria\": \"FA\",\n    \"id_doc_number\": \"1234567\",\n    \"citizenship\": \"Узбекистан\",\n    \"country\": \"ru\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\"\n}",
+              "raw": "{\n  \"params\": {\n    \"method\": \"patent_msk\",\n    \"id_doc_seria\": \"\",\n    \"id_doc_number\": \"FA1234567\",\n    \"citizenship\": \"Узбекистан\",\n    \"country\": \"ru\",\n    \"search_mode\": \"passport\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -3512,49 +3601,9 @@
                 "{{api_prod}}"
               ]
             },
-            "description": "Метод выполняет проверку патента для Москвы по данным документа, удостоверяющего личность.\n\nMethod: `patent_msk`\nDocs: https://newdb.net/docs/foreign/07-foreign_patent_msk/\n\nЗапрос отправляется на `POST https://api.newdb.net/v2`. Авторизация: заголовок `X-API-KEY: {{token}}`.\n\nРеестр API сверён 2026-09-23. Метод: `patent_msk`; обработчик: `patent_msk`."
+            "description": "Режим задаётся search_mode: passport (по умолчанию) или patent. Наличие issue_date не переключает режим. В passport обязателен id_doc_number: полный номер, включая буквы и ведущие нули; id_doc_seria можно не передавать или оставить пустым. При отдельной серии она добавляется перед номером. В patent обязательны patent_serial, patent_number, issue_date.\n\nПример режима patent: {\"method\": \"patent_msk\", \"country\": \"ru\", \"search_mode\": \"patent\", \"patent_serial\": \"77\", \"patent_number\": \"1234567890\", \"issue_date\": \"01.01.2026\", \"citizenship\": \"Узбекистан\"}"
           },
-          "response": [
-            {
-              "name": "complete",
-              "originalRequest": {
-                "method": "POST",
-                "header": [
-                  {
-                    "key": "Content-Type",
-                    "value": "application/json",
-                    "type": "text"
-                  },
-                  {
-                    "key": "X-API-KEY",
-                    "value": "{{token}}",
-                    "type": "text"
-                  }
-                ],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"params\": {\n    \"method\": \"patent_msk\",\n    \"id_doc_seria\": \"FA\",\n    \"id_doc_number\": \"1234567\",\n    \"citizenship\": \"Узбекистан\",\n    \"country\": \"ru\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\"\n}"
-                },
-                "url": {
-                  "raw": "{{api_prod}}",
-                  "host": [
-                    "{{api_prod}}"
-                  ]
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "_postman_previewlanguage": "json",
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json; charset=utf-8"
-                }
-              ],
-              "cookie": [],
-              "body": "{\n  \"params\": {\n    \"method\": \"patent_msk\",\n    \"id_doc_seria\": \"FA\",\n    \"id_doc_number\": \"1234567\",\n    \"citizenship\": \"Узбекистан\",\n    \"country\": \"ru\"\n  },\n  \"requestId\": \"00000000-0000-4000-8000-000000000001\",\n  \"datecreated\": \"2026-07-12 12:00:00\",\n  \"state\": \"complete\",\n  \"balance\": 90000,\n  \"results\": {\n    \"patent_msk\": {\n      \"taskId\": \"00000000-0000-4000-8000-000000000001\",\n      \"dateupdated\": \"2026-07-12 12:00:10\",\n      \"result\": {\n        \"status\": 200,\n        \"data\": []\n      }\n    }\n  },\n  \"finished_at\": \"2026-07-12 12:00:11\"\n}"
-            }
-          ],
+          "response": [],
           "event": [
             {
               "listen": "test",
